@@ -6,7 +6,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'; // Importe os ícon
 
 
 import TelaInicial from './componentes/telainicial';
-import MeuPerfil from './componentes/meuperfil';
+import Home from './pages/home';
+import MeuPerfil from './pages/meuperfil';
+import Body from './componentes/body';
 
 const App = () => {
   const [showTelaInicial, setShowTelaInicial] = useState(true);
@@ -21,7 +23,7 @@ const App = () => {
     <SafeAreaProvider>
       <PaperProvider theme={theme}>
         <View style={styles.container}>
-          {showTelaInicial ? <TelaInicial /> : <MeuPerfil />}
+          {showTelaInicial ? <TelaInicial /> : <Home />}
         </View>
       </PaperProvider>
     </SafeAreaProvider>

@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     //Logo Fuel
     logoContainer: {
         width: '100%',
-        height: '13%',
+        height: '11%',
         backgroundColor: '#00052F',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         resizeMode: 'contain',
-    },   
-    
+    },
+
 });
 
 export default Header;
