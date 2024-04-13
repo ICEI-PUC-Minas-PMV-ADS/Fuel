@@ -4,7 +4,8 @@ import { Appbar } from 'react-native-paper'; // Importe o Appbar do react-native
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
-
+import Header from './Header';
+import Footer from './footer';
 
 
 const MeuPerfil = () => {
@@ -41,25 +42,12 @@ const MeuPerfil = () => {
     return (
         <View style={styles.container}>
 
-            <View style={styles.logoContainer}>
-                <TouchableOpacity onPress={() => console.log('Menu clicado')} style={styles.menuContainer}>
-                    <Image source={require('../Img/Icones/menu.png')} style={styles.menu} />
-                </TouchableOpacity>
+            <Header />
 
-                <Image source={require('../Img/Logo/LogoP.png')} style={styles.logo} />
-
-                <TouchableOpacity onPress={() => console.log('Configurações clicadas')} style={styles.configContainer}>
-                    <Image source={require('../Img/Icones/config.png')} style={styles.config} />
-                </TouchableOpacity>
-            </View>
 
             <Text style={styles.textMeuPerfil}>Meu Perfil</Text>
 
 
-            <TouchableOpacity style={styles.buttonSair} onPress={() => Alert.alert('Sair')}>
-                <Image source={require('../Img/Icones/logout.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
-                <Text style={styles.buttonSairText}>Sair</Text>
-            </TouchableOpacity>
 
             <TouchableOpacity style={styles.ContainerIcoFoto} onPress={selecionarImagem}>
                 {imagemPerfil ? (
@@ -91,13 +79,11 @@ const MeuPerfil = () => {
                 onChangeText={text => setEmail(text)}
                 value={email}
             />
-
-            <Appbar style={styles.footer}>
-                <Appbar.Action icon={require('../Img/Icones/homepage.png')} color="white" size={36} onPress={() => console.log('Home clicado')} style={styles.iconbar} />
-                <Appbar.Action icon={require('../Img/Icones/favorito.png')} color="white" size={36} onPress={() => console.log('Favoritos clicado')} style={styles.iconbar} />
-                <Appbar.Action icon={require('../Img/Icones/mapa.png')} color="white" size={36} onPress={() => console.log('Mapa clicado')} style={styles.iconbar} />
-                <Appbar.Action icon={require('../Img/Icones/perfil.png')} color="white" size={36} onPress={() => console.log('Perfil clicado')} style={styles.iconbar} />
-            </Appbar>
+            <TouchableOpacity style={styles.buttonSair} onPress={() => Alert.alert('Sair')}>
+                <Image source={require('../Img/Icones/logout.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
+                <Text style={styles.buttonSairText}>Sair</Text>
+            </TouchableOpacity>
+            <Footer />
 
         </View>
     );
@@ -114,32 +100,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
 
-    //Logo Fuel
-    logoContainer: {
-        width: '100%',
-        height: '13%',
-        backgroundColor: '#00052F',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    logo: {
-        width: '45%',
-        height: '350%',
-        resizeMode: 'center',
-        alignItems: 'center',
-    },
-
-    //Icone Menu
-    menuContainer: {
-        marginLeft: 15,
-    },
-
-    menu: {
-        width: 30,
-        height: 30,
-        resizeMode: 'contain',
-    },
     //Icone Configurações
     configContainer: {
         marginRight: 15,
@@ -174,17 +134,15 @@ const styles = StyleSheet.create({
     },
     //Botão de Sair/Logout
     buttonSair: {
-        flexDirection: 'row',
-        width: '40%',
+        flexDirection: 'row', 
+        width: '40%', //Largura do Botão
         paddingVertical: 10,
         paddingHorizontal: 20,
         backgroundColor: 'red',
-        borderRadius: 35,
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: 20,
-        marginVertical: 85,
+        borderRadius: 35, //Arrendodamento do botão
+        justifyContent: 'center', //posicao centralizada verticalmente
+        alignItems: 'center', // posicao centralizada horizontalmente
+        marginTop: 300, // determinando onde o botao sair, deve ficar
     },
     //Texto do Botão Sair/Logout
     buttonSairText: {
@@ -201,30 +159,15 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
     },
-    //Rodapé
-    footer: {
-        width: '100%', //ajusta a largura do container rodape
-        height: '10%',//ajusta a altura do container rodape
-        backgroundColor: '#00052F',
-        justifyContent: 'center', //Centraliza Verticalmente
-        alignItems: 'center', //Centraliza Horizontalmente
-        bottom: 0,
-        paddingBottom: 5,
-        position: 'absolute',
-        flexDirection: 'row', // Deixa os itens flexivel, 'row'vai deixa-los horizontalmente.
-    },
-    //icones do rodapé
-    iconbar: {
-        marginHorizontal: 25,
-    },
+   
     //Tamanho da Imagem do Perfil
     imagemPerfil: {
         width: 200,
         height: 200,
         borderRadius: 100,
         marginTop: 20,
-     },
-    
+    },
+
 });
 
 export default MeuPerfil;
