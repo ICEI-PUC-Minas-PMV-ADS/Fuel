@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
     },
     appbar: {
         backgroundColor: '#00052F',
-        height: 90, //altura da parte azul do rodape.
+        height: 80, //altura da parte azul do rodape.
     },
     iconContainer: {
         flex: 1,
         alignItems: 'center', // posicao centralizada horizontalmente dos icones
         justifyContent: 'center', //posicao centralizada verticalmente dos icones
-        marginBottom: '8%',
+        marginBottom: '5%',
         width: windowWidth * 0.07, // Utilizando 8% da largura da tela
         height: windowHeight * 0.05, // Utilizando 6% da altura da tela
     },

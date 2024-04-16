@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 import Header from "../componentes/Header";
 import Footer from "../componentes/footer";
@@ -13,14 +13,15 @@ const Home = () => {
         <>
             <Header />
             <Body>
-
-
-
-                {/* RUAN AQUI IREMOS DESENVOLVER A PARTE PRINCIPAL DA TELA INICIAL*/}
-
-
-
-
+                <View style={styles.container}>
+                    <Text style={styles.text}>RUAN ACHO QUE AGORA CONSEGUI RESOLVER PARTE DOS BUGS.
+                        {"\n\n"} {/* Duas quebras de linha para adicionar um parágrafo */}
+                        O problema era as questões dos children que tinhamos que colocar no Body.js.
+                        Preciso entender essa função do children.
+                        {"\n\n"}
+                        Qualquer amarelo que aparecer nessa tela, vem do arquivo App.js, neste momento, linha 46.
+                        </Text>
+                </View>
             </Body>
             <Footer />
         </>
@@ -37,6 +38,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#ffffff',
     },
+    text: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'black',
+    }
 });
 
 export default Home;
