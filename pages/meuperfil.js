@@ -4,8 +4,8 @@ import { Appbar } from 'react-native-paper'; // Importe o Appbar do react-native
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
-import Header from './Header';
-import Footer from './footer';
+import Header from '../componentes/Header';
+import Footer from '../componentes/footer';
 
 
 const MeuPerfil = () => {
