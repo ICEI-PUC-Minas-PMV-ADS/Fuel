@@ -33,7 +33,7 @@ const Footer = () => {
       barStyle={{ backgroundColor: '#00052F' }}
       shifting={true}
       renderIcon={({ route, focused, color }) => (
-        <Icon source={route.icon} size={26} color={color} />
+        <Icon source={route.icon} size={30} color={color} />
       )}
     />
   );
