@@ -1,50 +1,42 @@
-import React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import { Appbar } from 'react-native-paper';
+import * as React from 'react';
+import { BottomNavigation, Text, Icon } from 'react-native-paper';
+
+const HomeRoute = () => <Text></Text>;
+const FavoritosRoute = () => <Text>Favoritos</Text>;
+const MapaRoute = () => <Text>Mapa</Text>;
+const PerfilRoute = () => <Text>Perfil</Text>;
+const CalculadoraRoute = () => <Text>Calculadora</Text>;
 
 const Footer = () => {
-    return (
-        <View style={styles.footer}>
-            <Appbar style={styles.appbar}>
-                <View style={styles.iconContainer}>
-                    <Appbar.Action icon={require('../Img/Icones/homepage.png')} color="white" onPress={() => console.log('Home clicado')} />
-                </View>
-                <View style={styles.iconContainer}>
-                    <Appbar.Action icon={require('../Img/Icones/favorito.png')} color="white" onPress={() => console.log('Favoritos clicado')} />
-                </View>
-                <View style={styles.iconContainer}>
-                    <Appbar.Action icon={require('../Img/Icones/mapa.png')} color="white" onPress={() => console.log('Mapa clicado')} />
-                </View>
-                <View style={styles.iconContainer}>
-                    <Appbar.Action icon={require('../Img/Icones/perfil.png')} color="white" onPress={() => console.log('Perfil clicado')} />
-                </View>
-            </Appbar>
-        </View>
-    );
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'home', title: 'Home', icon: 'gas-station' },
+    { key: 'favoritos', title: 'Favoritos', icon: 'star' },
+    { key: 'calculadora', title: 'Calculadora', icon: 'calculator' },
+    { key: 'mapa', title: 'Mapa', icon: 'map' },
+    { key: 'perfil', title: 'Perfil', icon: 'account' },
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    home: HomeRoute,
+    favoritos: FavoritosRoute,
+    calculadora: CalculadoraRoute,
+    mapa: MapaRoute,
+    perfil: PerfilRoute,
+  });
+
+  return (
+    <BottomNavigation
+      navigationState={{ index, routes }}
+      onIndexChange={setIndex}
+      renderScene={renderScene}
+      barStyle={{ backgroundColor: '#00052F' }}
+      shifting={true}
+      renderIcon={({ route, focused, color }) => (
+        <Icon source={route.icon} size={26} color={color} />
+      )}
+    />
+  );
 };
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
-const styles = StyleSheet.create({
-    footer: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-    },
-    appbar: {
-        backgroundColor: '#00052F',
-        height: 80, //altura da parte azul do rodape.
-    },
-    iconContainer: {
-        flex: 1,
-        alignItems: 'center', // posicao centralizada horizontalmente dos icones
-        justifyContent: 'center', //posicao centralizada verticalmente dos icones
-        marginBottom: '5%',
-        width: windowWidth * 0.07, // Utilizando 8% da largura da tela
-        height: windowHeight * 0.05, // Utilizando 6% da altura da tela
-    },
-});
 
 export default Footer;

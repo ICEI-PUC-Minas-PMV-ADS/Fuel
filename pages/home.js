@@ -1,48 +1,89 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, FlatList, Image } from "react-native";
+import { List } from 'react-native-paper';
 
 import Header from "../componentes/Header";
 import Footer from "../componentes/footer";
 import Body from "../componentes/body";
 
+const DATA = [
+    {
+        id: 'Posto1',
+        image: require('../Img/Logo/logoshell.png'),
+        title: 'Rua Dom João Antônio dos Santos, 195, Belo Horizonte',
+    },
+];
+
+const Item = ({ title, image }) => (
+    <View style={styles.itemContainer}>
+        <View style={styles.item}>
+            <Image source={image} style={styles.image} />
+            <Text style={styles.title}>{title}</Text>
+        </View>
+    </View>
+);
 
 const Home = () => {
 
-    return (
+    const renderItem = ({ item }) => (
+        <List.Item
+            title="First Item"
+            description="Item description"
+        />
+    );
 
+    return (
         <>
             <Header />
             <Body>
-                <View style={styles.container}>
-                    <Text style={styles.text}>RUAN ACHO QUE AGORA CONSEGUI RESOLVER PARTE DOS BUGS.
-                        {"\n\n"} {/* Duas quebras de linha para adicionar um parágrafo */}
-                        O problema era as questões dos children que tinhamos que colocar no Body.js.
-                        Preciso entender essa função do children.
-                        {"\n\n"}
-                        Qualquer amarelo que aparecer nessa tela, vem do arquivo App.js, neste momento, linha 46.
-                        </Text>
-                </View>
+                <FlatList
+                    style={styles.flatlist}
+                    data={DATA}
+                    renderItem={({ item }) => <Item title={item.title} image={item.image} />}
+                    keyExtractor={item => item.id}
+                />
             </Body>
             <Footer />
         </>
-
     );
-
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        width: '100%',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        backgroundColor: '#ffffff',
+    itemContainer: {
+        backgroundColor: "transparent",
+        marginLeft: 5,
+        shadowColor: "gray",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 0.50,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
-    text: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: 'black',
+    item: {
+        backgroundColor: "#FFFFFF",
+        padding: 20,
+        marginVertical: '2%',
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15,
+        flexDirection: 'row', // Para alinhar a imagem e o título lado a lado
+        alignItems: 'center' // Para centralizar verticalmente
+    },
+    title: {
+        fontSize: 13,
+        textAlign: "center",
+        marginLeft: 10,
+        flex: 0.7,
+    },
+    image: {
+        width: 50,
+        height: 45,
+    },
+    flatlist: {
+        flex: 1,
+        marginStart: 15,
+        width: '100%',
     }
 });
 
