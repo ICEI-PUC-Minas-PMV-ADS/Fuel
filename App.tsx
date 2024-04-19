@@ -3,12 +3,14 @@ import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as PaperProvider, DefaultTheme, } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; // Importe os ícones do pacote @expo/vector-icons
+import {NavigationContainer} from '@react-navigation/native';
 
 
 import TelaInicial from './componentes/telainicial';
 import Home from './pages/home';
 import MeuPerfil from './pages/meuperfil';
 import Body from './componentes/body';
+import Main from './navigations/main';
 
 const App = () => {
   const [showTelaInicial, setShowTelaInicial] = useState(true);
@@ -20,13 +22,15 @@ const App = () => {
   }, []);
 
   return (
+    <NavigationContainer>
     <SafeAreaProvider>
       <PaperProvider theme={theme}>
         <View style={styles.container}>
-          {showTelaInicial ? <TelaInicial /> : <Home />}
+          {showTelaInicial ? <TelaInicial /> : <Main />}
         </View>
       </PaperProvider>
     </SafeAreaProvider>
+    </NavigationContainer>
   );
 };
 

@@ -1,16 +1,24 @@
 import React from "react";
 import { View, StyleSheet, Text, FlatList, Image } from "react-native";
 import { List } from 'react-native-paper';
+import {NavigationContainer} from '@react-navigation/native';
 
 import Header from "../componentes/Header";
 import Footer from "../componentes/footer";
 import Body from "../componentes/body";
+
+import {useNavigation} from '@react-navigation/native'
 
 const DATA = [
     {
         id: 'Posto1',
         image: require('../Img/Logo/logoshell.png'),
         title: 'Rua Dom João Antônio dos Santos, 195, Belo Horizonte',
+    },
+    {
+        id: 'Posto2',
+        image: require('../Img/Logo/logoshell.png'),
+        title: 'Av. Amazonas, 8000, Belo Horizonte',
     },
 ];
 
@@ -24,6 +32,8 @@ const Item = ({ title, image }) => (
 );
 
 const Home = () => {
+
+    const navigation = useNavigation();
 
     const renderItem = ({ item }) => (
         <List.Item

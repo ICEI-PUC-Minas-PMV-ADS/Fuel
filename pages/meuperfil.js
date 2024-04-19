@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity, Al
 import { Appbar } from 'react-native-paper'; // Importe o Appbar do react-native-paper
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { useNavigation } from '@react-navigation/native';
 
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
@@ -13,6 +14,7 @@ const MeuPerfil = () => {
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
     const [nome, setNome] = useState('');
+    const navigation = useNavigation();
 
     useEffect(() => {
         solicitarPermissaoGaleria();
@@ -96,20 +98,9 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         justifyContent: 'flex-start',
-        alignItems: 'center',
-        backgroundColor: '#ffffff',
+        
     },
 
-    //Icone Configurações
-    configContainer: {
-        marginRight: 15,
-    },
-
-    config: {
-        width: 30,
-        height: 30,
-        resizeMode: 'contain',
-    },
     //Texto "meu perfil"
     textMeuPerfil: {
         fontSize: 45,
@@ -143,16 +134,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center', //posicao centralizada verticalmente
         alignItems: 'center', // posicao centralizada horizontalmente
         marginTop: 300, // determinando onde o botao sair, deve ficar
+        alignSelf: 'center', //centraliza o botão dentro do container
     },
     //Texto do Botão Sair/Logout
     buttonSairText: {
         fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
+        
     },
     //Container da parte onde esta o icone da foto
     ContainerIcoFoto: {
         marginTop: 20,
+        alignItems: 'center',
     },
     //Icone de Add Foto
     icoFoto: {
