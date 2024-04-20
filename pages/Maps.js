@@ -4,6 +4,8 @@ import { StyleSheet, View, Dimensions, Text } from 'react-native';
 import { Appbar, Avatar, Image, Button  } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { NavigationContainer } from '@react-navigation/native';
+import Header from '../componentes/Header';
+import Footer from '../componentes/footer';
 
 export default function Mapa() {
   const [open, setOpen] = useState(false);
@@ -36,7 +38,8 @@ const [items, setItems] = useState([
   const mapRef = createRef();
 
   return (
-    <View style={styles.container}>
+    <>
+      <Header />
       <Appbar.Header>
         <Appbar.Content title="Postos" />
       </Appbar.Header>
@@ -79,7 +82,9 @@ const [items, setItems] = useState([
           </View>
         </Marker>
       </MapView>
-    </View>
+      <Footer />
+    </>
+    
   );
 }
 

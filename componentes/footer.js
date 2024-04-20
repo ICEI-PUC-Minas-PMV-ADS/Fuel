@@ -3,11 +3,13 @@ import { BottomNavigation, Text, Icon, } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 
-const HomeRoute = () => <Text></Text>;
-const FavoritosRoute = () => <Text>Favoritos</Text>;
-const MapaRoute = () => <Text>Mapa</Text>;
-const PerfilRoute = () => <Text>Perfil</Text>;
+const HomeRoute = () => <Text>TEMOS QUE TENTAR CORRIGIR ISSO QUE O FOOTER ESTA IMPACTANDO</Text>;
+const FavoritosRoute = () => null;
+const MapaRoute = () => null;
+const PerfilRoute = () => null;
 const CalculadoraRoute = () => <Text>Calculadora</Text>;
+
+
 
 
 const Footer = () => {

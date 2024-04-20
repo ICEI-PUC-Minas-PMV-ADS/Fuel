@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     itemContainer: {
         backgroundColor: "transparent",
         marginLeft: 5,
+       
         shadowColor: "gray",
         shadowOffset: {
             width: 0,
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     item: {
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#FFFfFF",
         padding: 20,
         marginVertical: '2%',
         borderTopLeftRadius: 15,

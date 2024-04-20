@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
+import Body from '../componentes/body';
 
 
 const MeuPerfil = () => {
@@ -42,52 +43,54 @@ const MeuPerfil = () => {
 
 
     return (
-        <View style={styles.container}>
+        <>
 
             <Header />
-
-
-            <Text style={styles.textMeuPerfil}>Meu Perfil</Text>
-
-
-
-            <TouchableOpacity style={styles.ContainerIcoFoto} onPress={selecionarImagem}>
-                {imagemPerfil ? (
-                    <Image source={{ uri: imagemPerfil }} style={styles.icoFoto} />
-                ) : (
-                    <Image source={require('../Img/Icones/addfoto.png')} style={styles.icoFoto} />
-                )}
-            </TouchableOpacity>
+            <Body>
+                <Text style={styles.textMeuPerfil}>Meu Perfil</Text>
 
 
 
-            <TextInput //Campo Nome
-                style={styles.input}
-                placeholder='Nome'
-                onChangeText={text => setNome(text)}
-                value={nome}
-            />
+                <TouchableOpacity style={styles.ContainerIcoFoto} onPress={selecionarImagem}>
+                    {imagemPerfil ? (
+                        <Image source={{ uri: imagemPerfil }} style={styles.icoFoto} />
+                    ) : (
+                        <Image source={require('../Img/Icones/addfoto.png')} style={styles.icoFoto} />
+                    )}
+                </TouchableOpacity>
 
-            <TextInput //Campo Telefone
-                style={styles.input}
-                placeholder='Telefone'
-                onChangeText={text => setTelefone(text)}
-                value={telefone}
-            />
 
-            <TextInput //Campo Email
-                style={styles.input}
-                placeholder='E-mail'
-                onChangeText={text => setEmail(text)}
-                value={email}
-            />
-            <TouchableOpacity style={styles.buttonSair} onPress={() => Alert.alert('Sair')}>
-                <Image source={require('../Img/Icones/logout.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
-                <Text style={styles.buttonSairText}>Sair</Text>
-            </TouchableOpacity>
+
+                <TextInput //Campo Nome
+                    style={styles.input}
+                    placeholder='Nome'
+                    onChangeText={text => setNome(text)}
+                    value={nome}
+                />
+
+                <TextInput //Campo Telefone
+                    style={styles.input}
+                    placeholder='Telefone'
+                    onChangeText={text => setTelefone(text)}
+                    value={telefone}
+                />
+
+                <TextInput //Campo Email
+                    style={styles.input}
+                    placeholder='E-mail'
+                    onChangeText={text => setEmail(text)}
+                    value={email}
+                />
+                <TouchableOpacity style={styles.buttonSair} onPress={() => Alert.alert('Sair')}>
+                    <Image source={require('../Img/Icones/logout.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
+                    <Text style={styles.buttonSairText}>Sair</Text>
+                </TouchableOpacity>
+
+            </Body>
             <Footer />
 
-        </View>
+
+        </>
     );
 };
 
@@ -98,7 +101,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         justifyContent: 'flex-start',
-        
+
     },
 
     //Texto "meu perfil"
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#272727',
         marginTop: 2,
-        textAlign:'center'
+        textAlign: 'center'
     },
 
     //Input Nome/Telefone/Email
@@ -125,7 +128,7 @@ const styles = StyleSheet.create({
     },
     //Botão de Sair/Logout
     buttonSair: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         width: '40%', //Largura do Botão
         paddingVertical: 10,
         paddingHorizontal: 20,
@@ -141,7 +144,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'black',
-        
+
     },
     //Container da parte onde esta o icone da foto
     ContainerIcoFoto: {
@@ -153,7 +156,7 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
     },
-   
+
     //Tamanho da Imagem do Perfil
     imagemPerfil: {
         width: 200,
