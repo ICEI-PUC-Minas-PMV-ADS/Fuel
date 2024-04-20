@@ -105,10 +105,9 @@ const styles = StyleSheet.create({
     textMeuPerfil: {
         fontSize: 45,
         fontWeight: 'bold',
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
         color: '#272727',
         marginTop: 2,
+        textAlign:'center'
     },
 
     //Input Nome/Telefone/Email
@@ -121,6 +120,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 35, //Arrendondando o campo
         backgroundColor: '#EDEDED', //cor de fundo
+        alignSelf: 'center'
 
     },
     //Botão de Sair/Logout

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BottomNavigation, Text, Icon } from 'react-native-paper';
+import { BottomNavigation, Text, Icon, } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -46,7 +46,7 @@ const Footer = () => {
         navigation.navigate('Calculadora');
         break;
       case 3:
-        navigation.navigate('Mapa');
+        navigation.navigate('Maps');
         break;
       case 4:
         navigation.navigate('MeuPerfil');

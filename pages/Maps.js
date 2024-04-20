@@ -1,10 +1,11 @@
 import React, { useState, createRef } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, View, Dimensions, Text } from 'react-native';
-import { Appbar, Avatar, Image, } from 'react-native-paper';
+import { Appbar, Avatar, Image, Button  } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
+export default function Mapa() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState({
     latitude: -19.92246,
@@ -13,12 +14,12 @@ export default function App() {
 });
 const [items, setItems] = useState([
   {
-  label: 'Posto Ipiranga',
+  label: 'Posto Shell',
   value: {
-    latitude: -19.92246,
-    longitude: -43.97385,
-    label: 'Posto Ipiranga',
-    icon: () => <Image source={require()} style={styles.iconStyle} />
+    latitude: -19.92056,
+    longitude: -43.96929,
+    label: 'Posto Shell',
+    icon: () => <Image source={require("../Img/Logo/logoshell.png")} style={styles.iconStyle} />
     },
   },
   {
@@ -27,7 +28,7 @@ const [items, setItems] = useState([
       latitude: -19.91938,
       longitude: -43.97009,
       label: 'Posto Quick-Petrobrás',
-      icon: () => <Image source={require()} style={styles.iconStyle} />
+      icon: () => <Image source={require("../Img/Logo/logoshell.png")} style={styles.iconStyle} />
     },
   },
   ]);
@@ -72,7 +73,9 @@ const [items, setItems] = useState([
           }}>
           <View style={{ alignItems: 'center' }}>
             <Text style={styles.title}>{value.label}</Text>
-            <Avatar.Icon size={32} icon="" /> 
+            <Button icon={require(('../Img/Logo/logoshell.png'))}>
+             Press me
+            </Button>
           </View>
         </Marker>
       </MapView>

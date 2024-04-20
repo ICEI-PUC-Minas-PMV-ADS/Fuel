@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from "../pages/home";
 import MeuPerfil from "../pages/meuperfil";
+import Maps from "../pages/Maps";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,13 @@ const Main = () => {
       <Stack.Screen 
       name="MeuPerfil" 
       component={MeuPerfil}
+      options={{
+        header:() => null
+      }}
+       />
+        <Stack.Screen 
+      name="Maps" 
+      component={Maps}
       options={{
         header:() => null
       }}
