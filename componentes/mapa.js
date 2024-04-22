@@ -18,7 +18,7 @@ const [items, setItems] = useState([
     latitude: -19.92246,
     longitude: -43.97385,
     label: 'Posto Ipiranga',
-    icon: () => <Image source={require()} style={styles.iconStyle} />
+    icon: () => <Image source={require('../Img/Logo/logoshell.png')} style={styles.iconStyle} />
     },
   },
   {
@@ -27,7 +27,7 @@ const [items, setItems] = useState([
       latitude: -19.91938,
       longitude: -43.97009,
       label: 'Posto Quick-Petrobrás',
-      icon: () => <Image source={require()} style={styles.iconStyle} />
+      icon: () => <Image source={require('../Img/Logo/logoshell.png')} style={styles.iconStyle} />
     },
   },
   ]);
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 12,
-    color: '#FFF',
+    color: '#ffff',
     backgroundColor: 'red',
     padding: 5,
     borderRadius: 10,
