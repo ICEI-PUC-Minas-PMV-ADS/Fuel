@@ -21,17 +21,19 @@ const [items, setItems] = useState([
     latitude: -19.92056,
     longitude: -43.96929,
     label: 'Posto Shell',
-    icon: () => <Image source={require("../Img/Logo/logoshell.png")} style={styles.iconStyle} />
+    icon: () => <Image source={require('../Img/Logo/logoshell.png')} style={styles.iconStyle} />
     },
   },
   {
     label: 'Posto Quick-Petrobrás',
+    
     value: {
       latitude: -19.91938,
       longitude: -43.97009,
       label: 'Posto Quick-Petrobrás',
-      icon: () => <Image source={require("../Img/Logo/logoshell.png")} style={styles.iconStyle} />
-    },
+      icon: () => <Image source={require('../Img/Logo/logoshell.png')} style={styles.iconStyle} />
+}
+
   },
   ]);
 
@@ -74,11 +76,14 @@ const [items, setItems] = useState([
             latitude: value.latitude,
             longitude: value.longitude,
           }}>
+
           <View style={{ alignItems: 'center' }}>
-            <Text style={styles.title}>{value.label}</Text>
-            <Button icon={require(('../Img/Logo/logoshell.png'))}>
-             Press me
-            </Button>
+            <Text style={styles.title}>{value.label}
+            <Button 
+            icon={require('../Img/Logo/logoshell.png')}>
+           </Button>
+            </Text>
+          
           </View>
         </Marker>
       </MapView>
@@ -91,7 +96,7 @@ const [items, setItems] = useState([
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'red',
   },
   map: {
     flex: 1,
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 12,
     color: '#FFF',
-    backgroundColor: 'red',
+    backgroundColor: '',
     padding: 5,
     borderRadius: 10,
   },

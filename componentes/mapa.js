@@ -72,7 +72,8 @@ const [items, setItems] = useState([
           }}>
           <View style={{ alignItems: 'center' }}>
             <Text style={styles.title}>{value.label}</Text>
-            <Avatar.Icon size={32} icon="" /> 
+            Image={require('../Img/Logo/logoshell.png')}
+          
           </View>
         </Marker>
       </MapView>
@@ -83,7 +84,7 @@ const [items, setItems] = useState([
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'red',
   },
   map: {
     flex: 1,
