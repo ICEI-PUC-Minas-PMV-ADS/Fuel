@@ -62,7 +62,7 @@ const Home = () => {
             <Body>
                 <FlatList
                     style={styles.flatlist}
-                    data={postos}
+                    data={DATA}
                     renderItem={({ item }) => <Item title={item.title} image={item.image} />}
                     keyExtractor={item => item.id}
                 />
