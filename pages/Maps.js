@@ -1,7 +1,7 @@
 import React, { useState, createRef } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, View, Dimensions, Text } from 'react-native';
-import { Appbar, Avatar, Image, Button  } from 'react-native-paper';
+import { Appbar, Avatar, Image, Icon,  Button, IconButton  } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { NavigationContainer } from '@react-navigation/native';
 import Header from '../componentes/Header';
@@ -18,20 +18,20 @@ const [items, setItems] = useState([
   {
   label: 'Posto Shell',
   value: {
-    latitude: -19.92056,
-    longitude: -43.96929,
+    latitude: -19.55297,
+    longitude: -43.55541,
     label: 'Posto Shell',
-    icon: () => <Image source={require('../Img/Logo/logoshell.png')} style={styles.iconStyle} />
+    //icon: () => <Image source={require('../Img/Logo/logoshell.png')} style={styles.iconStyle} />
     },
   },
   {
     label: 'Posto Quick-Petrobrás',
     
     value: {
-      latitude: -19.91938,
-      longitude: -43.97009,
+      latitude: -19.91939,
+      longitude: -43.96950,
       label: 'Posto Quick-Petrobrás',
-      icon: () => <Image source={require('../Img/Logo/logoshell.png')} style={styles.iconStyle} />
+      //icon: () => <Image source={require('../Img/Logo/logoshell.png')} style={styles.iconStyle} />
 }
 
   },
@@ -78,12 +78,10 @@ const [items, setItems] = useState([
           }}>
 
           <View style={{ alignItems: 'center' }}>
-            <Text style={styles.title}>{value.label}
-            <Button 
-            icon={require('../Img/Logo/logoshell.png')}>
-           </Button>
-            </Text>
-          
+            <Text style={styles.title}>{value.label}  </Text>
+            <Button  icon={require('../Img/Logo/logoshell.png')}
+                      style={styles.IconButton} />
+            
           </View>
         </Marker>
       </MapView>
@@ -104,9 +102,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 12,
     color: '#FFF',
-    backgroundColor: 'red',
+    backgroundColor: 'gray',
     padding: 5,
-    borderRadius: 10,
+    borderRadius: 5,
+  },
+  IconButton: {
+    tintColor: 'null',
+    width: 50,
+    height: 50,
   },
 });
    
