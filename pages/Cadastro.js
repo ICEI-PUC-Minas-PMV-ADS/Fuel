@@ -1,46 +1,39 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { insertEstabelecimentos } from '../services/EstabelecimentosDB';
+import { useNavigation } from '@react-navigation/native';
 import Header from '../componentes/Header';
-import Body from '../componentes/body'
+import Body from '../componentes/body';
 import Footer from '../componentes/footer';
 
 const CadastroEstabelecimento = () => {
-    const [fields, setFields] = useState({
-        nome: '',
-        cnpj: '',
-        endereco: {
-            logradouro: '',
-            numero: '',
-            bairro: '',
-            cidade: '',
-            estado: '',
-            cep: '',
-        },
-        telefone: '',
-        tipoCombustivel: '',
-        preco: '',
-        bandeiraPosto: '',
-        outrosServicos: '',
-    });
+
+    const navigation = useNavigation();
+    
+    const [nome, setNome] = useState('');
+    const [cnpj, setCnpj] = useState('');
+    const [endereco, setEndereco] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [tipoCombustivel, setTipoCombustivel] = useState('');
+    const [preco, setPreco] = useState('');
+    const [bandeiraPosto, setBandeiraPosto] = useState('');
+    const [outrosServicos, setOutrosServicos] = useState('');
 
     const handleCadastro = () => {
-        // Lógica para inserir o estabelecimento no banco de dados
-        insertEstabelecimentos(fields)
-            .then(() => {
-                console.log('Estabelecimento cadastrado com sucesso!');
-                // Adicione aqui a lógica para redirecionar para a página desejada após o cadastro
-                navigation.navigate('Home'); // Supondo que 'Home' seja o nome da sua tela Home
-            })
-            .catch((error) => {
-                console.error('Erro ao cadastrar estabelecimento:', error);
-            });
-    };
+        insertEstabelecimentos({
+            nome: nome,
+            cnpj: cnpj,
+            endereco: endereco,
+            telefone: telefone,
+            tipoCombustivel: tipoCombustivel,
+            preco: preco,
+            bandeiraPosto: bandeiraPosto,
+            outrosServicos: outrosServicos,
+        }).then(() => {
+            console.log('Estabelecimento cadastrado com sucesso!');
+            // Adicione aqui a lógica para redirecionar para a página desejada após o cadastro
+            navigation.navigate('Home'); 
 
-    const handleChange = (fieldName, value) => {
-        setFields({
-            ...fields,
-            [fieldName]: value,
         });
     };
 
@@ -52,55 +45,60 @@ const CadastroEstabelecimento = () => {
                     <Text style={styles.label}>Nome:</Text>
                     <TextInput
                         style={styles.input}
-                        value={fields.nome}
-                        onChangeText={(value) => handleChange('nome', value)}
+                        value={nome}
+                        onChangeText={(value) => setNome(value)}
                     />
 
                     <Text style={styles.label}>CNPJ:</Text>
                     <TextInput
                         style={styles.input}
-                        value={fields.cnpj}
-                        onChangeText={(value) => handleChange('cnpj', value)}
+                        value={cnpj}
+                        onChangeText={(value) => setCnpj(value)}
                     />
 
                     <Text style={styles.label}>Endereço:</Text>
                     <TextInput
                         style={styles.input}
-                        value={fields.endereco}
-                        onChangeText={(value) => handleChange('endereco', value)}
+                        value={endereco}
+                        onChangeText={(value) => setEndereco(value)}
                     />
 
                     <Text style={styles.label}>Telefone:</Text>
                     <TextInput
                         style={styles.input}
-                        value={fields.telefone}
-                        onChangeText={(value) => handleChange('telefone', value)}
+                        value={telefone}
+                        onChangeText={(value) => setTelefone(value)}
                     />
+
                     <Text style={styles.label}>Tipo de Combustivel:</Text>
                     <TextInput
                         style={styles.input}
-                        value={fields.tipoCombustivel}
-                        onChangeText={(value) => handleChange('tipoCombustivel', value)}
+                        value={tipoCombustivel}
+                        onChangeText={(value) => setTipoCombustivel(value)}
                     />
+
                     <Text style={styles.label}>Preço:</Text>
                     <TextInput
                         style={styles.input}
-                        value={fields.preco}
-                        onChangeText={(value) => handleChange('preco', value)}
+                        value={preco}
+                        onChangeText={(value) => setPreco(value)}
                     />
+
                     <Text style={styles.label}>Bandeira do Posto:</Text>
                     <TextInput
                         style={styles.input}
-                        value={fields.bandeiraPosto}
-                        onChangeText={(value) => handleChange('bandeiraPosto', value)}
+                        value={bandeiraPosto}
+                        onChangeText={(value) => setBandeiraPosto(value)}
                     />
+
                     <Text style={styles.label}>Outros Serviços:</Text>
                     <TextInput
                         style={styles.input}
-                        value={fields.outrosServicos}
-                        onChangeText={(value) => handleChange('outrosServicos', value)}
+                        value={outrosServicos}
+                        onChangeText={(value) => setOutrosServicos(value)}
                     />
-                    {/* Adicione os demais campos aqui com suas respectivas TextInputs */}
+
+                
                     <Button
                         title="Cadastrar Estabelecimento"
                         onPress={handleCadastro}
