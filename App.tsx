@@ -11,6 +11,7 @@ import Home from './pages/home';
 import MeuPerfil from './pages/meuperfil';
 import Body from './componentes/body';
 import Main from './navigations/main';
+import Cadastro from './pages/Cadastro';
 
 const App = () => {
   const [showTelaInicial, setShowTelaInicial] = useState(true);

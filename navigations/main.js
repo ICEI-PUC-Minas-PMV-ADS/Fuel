@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from "../pages/home";
 import MeuPerfil from "../pages/meuperfil";
 import Maps from "../pages/Maps";
+import Cadastro from "../pages/Cadastro";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,13 @@ const Main = () => {
         <Stack.Screen 
       name="Maps" 
       component={Maps}
+      options={{
+        header:() => null
+      }}
+       />
+       <Stack.Screen 
+      name="Cadastro" 
+      component={Cadastro}
       options={{
         header:() => null
       }}

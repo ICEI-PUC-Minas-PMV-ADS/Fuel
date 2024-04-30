@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, FlatList, Image } from "react-native";
 import { List } from 'react-native-paper';
 import {NavigationContainer} from '@react-navigation/native';
 
+//IMPORTAÇÕES DE COMPONENTES
 import Header from "../componentes/Header";
 import Footer from "../componentes/footer";
 import Body from "../componentes/body";
+
+//IMPORTAÇÕES DE BANCO DE DADOS
+import  {getEstabelecimentos} from '../services/EstabelecimentosDB';
+
 
 import {useNavigation} from '@react-navigation/native'
 
@@ -35,6 +40,15 @@ const Home = () => {
 
     const navigation = useNavigation();
 
+    const [postos, setPostos] = useState([]);
+    
+
+    useEffect(() => {
+        getEstabelecimentos().then((dados) =>{
+            setPostos(dados);
+});
+    },[]);
+
     const renderItem = ({ item }) => (
         <List.Item
             title="First Item"
@@ -48,7 +62,7 @@ const Home = () => {
             <Body>
                 <FlatList
                     style={styles.flatlist}
-                    data={DATA}
+                    data={postos}
                     renderItem={({ item }) => <Item title={item.title} image={item.image} />}
                     keyExtractor={item => item.id}
                 />
