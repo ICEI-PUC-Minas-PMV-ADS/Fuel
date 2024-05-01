@@ -20,6 +20,7 @@ const CadastroEstabelecimento = () => {
     const [outrosServicos, setOutrosServicos] = useState('');
 
     const handleCadastro = () => {
+        console.log('Iniciando cadastro do estabelecimento...');
         insertEstabelecimentos({
             nome: nome,
             cnpj: cnpj,
@@ -33,10 +34,12 @@ const CadastroEstabelecimento = () => {
             console.log('Estabelecimento cadastrado com sucesso!');
             // Adicione aqui a lógica para redirecionar para a página desejada após o cadastro
             navigation.navigate('Home'); 
-
+        })
+        .catch(error => {
+            console.error('Erro ao cadastrar estabelecimento:', error);
         });
     };
-
+    
     return (
         <>
             <Header />
@@ -102,6 +105,7 @@ const CadastroEstabelecimento = () => {
                     <Button
                         title="Cadastrar Estabelecimento"
                         onPress={handleCadastro}
+                        
                     />
                 </View>
             </Body>
