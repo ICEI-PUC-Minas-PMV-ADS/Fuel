@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity, Alert, TextInput } from 'react-native';
-import { Appbar } from 'react-native-paper'; // Importe o Appbar do react-native-paper
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
 import Body from '../componentes/body';
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
-import { useNavigation } from '@react-navigation/native';
 
 
 const Login = () => {
@@ -16,20 +12,44 @@ const Login = () => {
     const [signupPassword, setSignupPassword] = useState('');
     const [signupPhoneNumber, setSignupPhoneNumber] = useState('');
 
+    const passwordInputRef = useRef(null);
+    const nameInputRef = useRef(null);
+    const signupPasswordInputRef = useRef(null);
+
+    const isValidPhoneNumber = (number) => {
+        return /[0-9]{10,11}/.test(number);
+    };
+    
+    const isValidPassword = (password) => {
+        return password.length > 7;
+    };
+    
     const handleLogin = () => {
-        // Implemente a lógica de autenticação aqui
+        if (!isValidPhoneNumber(phoneNumber) || !isValidPassword(loginPassword)) {
+            Alert.alert("Erro", "Número de celular ou senha inválidos.");
+            return;
+        }
         console.log('Número de celular:', phoneNumber);
         console.log('Senha:', loginPassword);
         // Exemplo: chame uma função de autenticação com os dados de número de celular e senha
     };
 
     const handleSignUp = () => {
-        // Implemente a lógica de cadastro aqui
+        if (!isValidPhoneNumber(signupPhoneNumber) || !isValidPassword(signupPassword) || name.trim() === "") {
+            Alert.alert("Erro", "Por favor, insira informações válidas.");
+            return;
+        }
         console.log('Nome:', name);
         console.log('Número de celular:', signupPhoneNumber);
         console.log('Nova senha:', signupPassword);        
         // Exemplo: chame uma função para enviar os dados de cadastro para o servidor
     };
+
+    const handleForgotPassword = () => {
+        // Navegação para a tela de redefinição de senha
+        Alert.alert("Resetar Senha", "Funcionalidade de resetar senha não implementada.");
+    };    
+    
 
     return (
         <>
@@ -46,8 +66,9 @@ const Login = () => {
                         placeholderTextColor={styles.placeholderText.color} 
                         onChangeText={text => setPhoneNumber(text)}
                         value={phoneNumber}
-                        keyboardType="phone-pad"
+                        keyboardType="numeric"
                     />
+                    
 
                     {/* Campo de entrada para a senha */}
                     <TextInput
@@ -57,7 +78,9 @@ const Login = () => {
                         onChangeText={setLoginPassword} 
                         value={loginPassword} 
                         placeholderTextColor={styles.placeholderText.color} 
-                        
+                        returnKeyType="done"
+                        ref={passwordInputRef}
+                        onSubmitEditing={() => nameInputRef.current.focus()}
                     />
 
                     {/* Botão de acessar */}
@@ -65,7 +88,7 @@ const Login = () => {
                         <Text style={styles.buttonText}>Acessar</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleForgotPassword}>
                         <Text style={styles.esqueciSenha}>Esqueci minha senha</Text>
                     </TouchableOpacity>
 
@@ -85,6 +108,9 @@ const Login = () => {
                         placeholderTextColor={styles.placeholderText.color} 
                         onChangeText={text => setName(text)}
                         value={name}
+                        returnKeyType="next"
+                        ref={nameInputRef}
+                        onSubmitEditing={() => nameInputRef.current.focus()}
                     />
 
                     {/* Campo de entrada para o número de celular no cadastro */}
@@ -105,6 +131,8 @@ const Login = () => {
                         value={signupPassword} 
                         placeholderTextColor={styles.placeholderText.color} 
                         secureTextEntry={true}
+                        returnKeyType="done"
+                        ref={signupPasswordInputRef}                        
                     />
 
                     {/* Botão de confirmar cadastro */}
