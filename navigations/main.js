@@ -5,6 +5,7 @@ import Home from "../pages/home";
 import MeuPerfil from "../pages/meuperfil";
 import Maps from "../pages/Maps";
 import Cadastro from "../pages/Cadastro";
+import Login from "../pages/Login";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,13 @@ const Main = () => {
        <Stack.Screen 
       name="Cadastro" 
       component={Cadastro}
+      options={{
+        header:() => null
+      }}
+       />
+       <Stack.Screen 
+      name="Login" 
+      component={Login}
       options={{
         header:() => null
       }}

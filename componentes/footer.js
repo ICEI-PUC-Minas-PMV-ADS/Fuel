@@ -52,7 +52,7 @@ const Footer = () => {
         navigation.navigate('Maps');
         break;
       case 4:
-        navigation.navigate('MeuPerfil');
+        navigation.navigate('Login');
         break;
       default:
         break;

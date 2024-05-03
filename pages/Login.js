@@ -3,9 +3,10 @@ import { View, Text, StyleSheet, Button, TouchableOpacity, Alert, TextInput } fr
 import { Appbar } from 'react-native-paper'; // Importe o Appbar do react-native-paper
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-
+import Body from '../componentes/body';
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Login = () => {
@@ -31,8 +32,9 @@ const Login = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <Header />                
+        <Body>
+            <Header />  
+                <View style={styles.container}>                                      
                     <Text style={styles.textTitulo}>Login</Text>
                     <Text style={styles.subtitulo}>Entre com seu número de celular e senha!</Text>
 
@@ -108,14 +110,16 @@ const Login = () => {
                     <TouchableOpacity style={[styles.button, { backgroundColor: '#027500', borderColor: '#000000' }]} onPress={handleSignUp}>
                         <Text style={styles.buttonText}>Confirmar cadastro</Text>
                     </TouchableOpacity>
+                    </View>
                 <Footer />
-            </View>
+                </Body>
+            
     );
 };
 
 const styles = StyleSheet.create({
 
-    // Parte principal da tela, parte abaixo do ico Foto.
+    // Parte principal da tela, parte abaixo do icone Foto.
     container: {
         flex: 1,
         width: '100%',
