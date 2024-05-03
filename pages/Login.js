@@ -32,8 +32,9 @@ const Login = () => {
     };
 
     return (
-        <Body>
-            <Header />  
+        <>
+        <Header /> 
+            <Body>             
                 <View style={styles.container}>                                      
                     <Text style={styles.textTitulo}>Login</Text>
                     <Text style={styles.subtitulo}>Entre com seu número de celular e senha!</Text>
@@ -110,9 +111,10 @@ const Login = () => {
                     <TouchableOpacity style={[styles.button, { backgroundColor: '#027500', borderColor: '#000000' }]} onPress={handleSignUp}>
                         <Text style={styles.buttonText}>Confirmar cadastro</Text>
                     </TouchableOpacity>
-                    </View>
-                <Footer />
+                    </View>                
                 </Body>
+                <Footer />
+            </>
             
     );
 };
