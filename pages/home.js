@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
         marginVertical: '2%',
         borderTopLeftRadius: 15,
         borderBottomLeftRadius: 15,
-        flexDirection: 'row', // Para alinhar a imagem e o título lado a lado
-        alignItems: 'center', // Para centralizar verticalmente
+        flexDirection: 'row', 
+        alignItems: 'center',
     },
     title: {
         fontSize: 13,
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 1,
         backgroundColor: 272727,
-        marginVertical: 5, // Ajuste conforme necessário
+        marginVertical: 5,
       },
 
     subtitleAmount2: {
