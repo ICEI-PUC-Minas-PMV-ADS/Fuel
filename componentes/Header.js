@@ -25,7 +25,7 @@ const Header = () => {
 <Menu
         visible={menuVisible}
         onDismiss={closeMenu}
-        anchor={<Appbar.Action icon="menu" onPress={openMenu} size={31} />}
+        anchor={<Appbar.Action icon="menu" onPress={openMenu} size={30} color={'white'} />}
         contentStyle={styles.menuContent}
       >
         {/* Opções do menu */}
@@ -44,9 +44,10 @@ const Header = () => {
 
       <Appbar.Action
         icon="cog"
-        size={31} // Definindo o tamanho dos ícones
+        size={28} // Definindo o tamanho dos ícones
         onPress={handleSettingsPress}
         shifting={true}
+        color={'white'}
 
       // color={navigation.isFocused(true) ? '#ffffff' : '#888888'} // Definindo a cor dos ícones com base no estado ativo/inativo
       />
@@ -64,12 +65,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: '38%',
+    width: '50%',
     height: '120%',
   },
 
   menuContent: {
-    opacity: 0.85, // Definindo a opacidade da mini tela do menu
+    opacity: .85, // Definindo a opacidade da mini tela do menu
   },
 });
 
