@@ -9,7 +9,7 @@ import Footer from "../componentes/footer";
 import Body from "../componentes/body";
 
 //IMPORTAÇÕES DE BANCO DE DADOS
-import  {getEstabelecimentos} from '../services/EstabelecimentosDB';
+//import  {getEstabelecimentos} from '../services/EstabelecimentosDB';
 
 
 import {useNavigation} from '@react-navigation/native'
@@ -43,11 +43,11 @@ const Home = () => {
     const [postos, setPostos] = useState([]);
     
 
-    useEffect(() => {
-        getEstabelecimentos().then((dados) =>{
-            setPostos(dados);
-});
-    },[]);
+  //  useEffect(() => {
+    //    getEstabelecimentos().then((dados) =>{
+      //      setPostos(dados);
+//});
+  //  },[]);
 
     const renderItem = ({ item }) => (
         <List.Item
