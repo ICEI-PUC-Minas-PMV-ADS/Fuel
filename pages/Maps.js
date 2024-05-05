@@ -1,9 +1,8 @@
 import React, { useState, createRef } from 'react';
-import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet, View, Dimensions, Text } from 'react-native';
-import { Appbar, Avatar, Image, Button  } from 'react-native-paper';
+import { StyleSheet, View, Dimensions, Text, Image } from 'react-native';
+import { Appbar } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { NavigationContainer } from '@react-navigation/native';
+import MapView, { Marker } from 'react-native-maps';
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
 
@@ -11,30 +10,26 @@ export default function Mapa() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState({
     latitude: -19.92246,
-  longitude: -43.97385,
-  label: 'Posto Ipiranga',
-});
-const [items, setItems] = useState([
-  {
-  label: 'Posto Shell',
-  value: {
-    latitude: -19.92056,
-    longitude: -43.96929,
-    label: 'Posto Shell',
-    icon: () => <Image source={require('../Img/Logo/logoshell.png')} style={styles.iconStyle} />
+    longitude: -43.97385,
+    label: 'Posto Ipiranga',
+  });
+  const [items, setItems] = useState([
+    {
+      label: 'Posto Shell',
+      value: {
+        latitude: -19.55297,
+        longitude: -43.55541,
+        label: 'Posto Shell',
+      },
     },
-  },
-  {
-    label: 'Posto Quick-Petrobrás',
-    
-    value: {
-      latitude: -19.91938,
-      longitude: -43.97009,
+    {
       label: 'Posto Quick-Petrobrás',
-      icon: () => <Image source={require('../Img/Logo/logoshell.png')} style={styles.iconStyle} />
-}
-
-  },
+      value: {
+        latitude: -19.91939,
+        longitude: -43.96950,
+        label: 'Posto Quick-Petrobrás',
+      },
+    },
   ]);
 
   const mapRef = createRef();
@@ -75,39 +70,36 @@ const [items, setItems] = useState([
           coordinate={{
             latitude: value.latitude,
             longitude: value.longitude,
-          }}>
-
+          }}
+        >
           <View style={{ alignItems: 'center' }}>
-            <Text style={styles.title}>{value.label}
-            <Button 
-            icon={require('../Img/Logo/logoshell.png')}>
-           </Button>
-            </Text>
-          
+            <Text style={styles.title}>{value.label}</Text>
+            <Image
+              source={require('../Img/Logo/logoshell.png')}
+              style={styles.imageStyle}
+            />
           </View>
         </Marker>
       </MapView>
       <Footer />
     </>
-    
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'red',
-  },
   map: {
     flex: 1,
   },
   title: {
     fontSize: 12,
     color: '#FFF',
-    backgroundColor: 'red',
+    backgroundColor: 'gray',
     padding: 5,
-    borderRadius: 10,
+    borderRadius: 5,
+  },
+  imageStyle: {
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',  
   },
 });
-   
-   
