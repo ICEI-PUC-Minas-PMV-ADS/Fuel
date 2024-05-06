@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { ScrollView, View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Header from '../componentes/Header';
+import Footer from '../componentes/footer';
+
 import { insertEstabelecimento } from '../services/DbServices'; // Verifique o caminho para assegurar que está correto
 
 const CadastroEstabelecimento = () => {
@@ -39,6 +42,8 @@ const CadastroEstabelecimento = () => {
     };
 
     return (
+        <>
+        <Header />
         <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.container}>
                 <Text style={styles.label}>Nome:</Text>
@@ -92,6 +97,8 @@ const CadastroEstabelecimento = () => {
                 <Button title="Cadastrar Estabelecimento" onPress={handleCadastro} />
             </View>
         </ScrollView>
+        <Footer />
+        </>
     );
 };
 
