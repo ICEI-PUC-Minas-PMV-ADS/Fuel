@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { insertEstabelecimentos } from '../services/EstabelecimentosDB';
 import { useNavigation } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 import Header from '../componentes/Header';
 import Body from '../componentes/body';
 import Footer from '../componentes/footer';
 
+import { getPostos, insertPostos } from '../services/PostosServicesDb';
+
 const CadastroEstabelecimento = () => {
 
     const navigation = useNavigation();
+    const isFocused = useIsFocused();
+
+    const [Postos, setPostos] = useState ([]);
+
+    useEffect(() => {
+        getPostos().then(dados => {
+            setPostos(dados);
+        }).catch(error => {
+            console.error('Erro ao buscar os postos:', error);
+        });
+    
+        console.log('Iniciando a tela!');
+    }, []);
     
     const [nome, setNome] = useState('');
     const [cnpj, setCnpj] = useState('');
@@ -21,7 +36,7 @@ const CadastroEstabelecimento = () => {
 
     const handleCadastro = () => {
         console.log('Iniciando cadastro do estabelecimento...');
-        insertEstabelecimentos({
+        insertPostos({
             nome: nome,
             cnpj: cnpj,
             endereco: endereco,
@@ -39,12 +54,39 @@ const CadastroEstabelecimento = () => {
             console.error('Erro ao cadastrar estabelecimento:', error);
         });
     };
+
+    const handleSalvar = () => {
+
+        if(!item){
+
+            insertGasto(
+                {
+                    nome: nome,
+                    cnpj: cnpj,
+                    endereco: endereco,
+                    telefone: telefone,
+                    tipoCombustivel: tipoCombustivel,
+                    preco: preco,
+                    bandeiraPosto: bandeiraPosto,
+                    outrosServicos: outrosServicos,
+                }
+            ).then();
+        }
+
+        navigation.goBack();
+
+    };
     
     return (
         <>
             <Header />
             <Body>
                 <View style={styles.container}>
+                    <Button
+                        title="Cadastrar Estabelecimento"
+                        onPress={handleCadastro}                        
+                    />
+
                     <Text style={styles.label}>Nome:</Text>
                     <TextInput
                         style={styles.input}
@@ -102,11 +144,7 @@ const CadastroEstabelecimento = () => {
                     />
 
                 
-                    <Button
-                        title="Cadastrar Estabelecimento"
-                        onPress={handleCadastro}
-                        
-                    />
+                    
                 </View>
             </Body>
             <Footer />
