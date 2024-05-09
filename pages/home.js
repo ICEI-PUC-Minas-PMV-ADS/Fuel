@@ -9,29 +9,22 @@ import Footer from "../componentes/footer";
 import Body from "../componentes/body";
 import { getPostos } from '../services/PostosServicesDb';
 
-
-/*const DATA = [
-    {
-        id: 'Posto1',
-        bandeira: require('../Img/Logo/logoshell.png'),
-        endereco: 'Rua Dom João Antônio dos Santos, 195, Padre Esutáquio - Belo Horizonte',
-        preco_1: 'R$: 5,74',
-        tipoCombustivel_1: 'Gasolina',
-        preco_2: 'R$: 3,87',
-        tipoCombustivel_2: 'Álcool',
-    },
-];*/
-
 const Item = ({ image, title, subtitleAmount, subtitleType, subtitleAmount2, subtitleType2 }) => (
     <View style={styles.itemContainer}>
-        <Image source={image} style={styles.image} />
-        <Text style={styles.title}>{title}</Text>
-        <View style={styles.subtitleContainer}>
+        <View style={styles.item}>
+            <Image source={image} style={styles.image} />
+                <Text style={styles.title}>{title}</Text>
+        <View style={styles.subtitleContainer}>            
+        <View style={styles.subtitleRow}> 
             <Text style={styles.preco_1}>{subtitleAmount}</Text>
             <Text style={styles.tipoCombustivel_1}>{subtitleType}</Text>
             <View style={styles.divider} />
+        <View style={styles.subtitleRow}> 
             <Text style={styles.preco_2}>{subtitleAmount2}</Text>
             <Text style={styles.tipoCombustivel_2}>{subtitleType2}</Text>
+        </View>    
+        </View>
+        </View>
         </View>
     </View>
 );
@@ -49,7 +42,7 @@ const Home = () => {
 
     const renderItem = ({ item }) => (
         <Item
-            title={item.nome}
+            title={item.endereco}
             subtitleAmount={item.preco_1}
             subtitleType={item.tipoCombustivel_1}
             subtitleAmount2={item.preco_2}
@@ -84,7 +77,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
     },
-    /*item: {
+    item: {
         backgroundColor: "#FFFfFF",
         padding: 10,
         marginVertical: '2%',
@@ -92,32 +85,32 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 15,
         flexDirection: 'row', // Para alinhar a imagem e o título lado a lado
         alignItems: 'center', // Para centralizar verticalmente
-    },*/
-    endereco: {
+    },
+    title: {
         fontSize: 13,
         textAlign: "center",
         marginLeft: 15,
         marginRight: 15,
         flex: 1,
     },
-
     subtitleRow: {
         alignItems: 'center',
         verticalAlign: 'center',
     },
-    subtitleAmount: {
+    preco_1: {
         fontSize: 16,
         color: 'darkgreen',
         fontWeight: 'bold',
+        marginRight: 10,
         
     },
-    subtitleType: {
+    tipoCombustivel_1: {
         fontSize: 16,
         color: 'darkgreen',
         fontWeight: 'bold',
+        marginRight: 10,
         
     },
-
     divider: {
         width: '100%',
         height: 1,
@@ -125,19 +118,20 @@ const styles = StyleSheet.create({
         marginVertical: 5, // Ajuste conforme necessário
       },
 
-    subtitleAmount2: {
+    preco_2: {
         fontSize: 16,
         color: 'darkgreen',
         fontWeight: 'bold',
+        marginRight: 10,
 
     },
-    subtitleType2: {
+    tipoCombustivel_2: {
         fontSize: 16,
         color: 'darkgreen',
         fontWeight: 'bold',
+        marginRight: 10,
        
     },
-
     image: {
         width: 50,
         height: 45,
