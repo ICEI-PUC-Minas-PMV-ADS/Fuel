@@ -1,49 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, FlatList, Image } from "react-native";
-import { List } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+
 
 //IMPORTAÇÕES DE COMPONENTES
 import Header from "../componentes/Header";
 import Footer from "../componentes/footer";
 import Body from "../componentes/body";
+import { getPostos } from '../services/PostosServicesDb';
 
 
-import { useNavigation } from '@react-navigation/native'
+/*const DATA = [
+    {
+        id: 'Posto1',
+        bandeira: require('../Img/Logo/logoshell.png'),
+        endereco: 'Rua Dom João Antônio dos Santos, 195, Padre Esutáquio - Belo Horizonte',
+        preco_1: 'R$: 5,74',
+        tipoCombustivel_1: 'Gasolina',
+        preco_2: 'R$: 3,87',
+        tipoCombustivel_2: 'Álcool',
+    },
+];*/
 
 const Item = ({ image, title, subtitleAmount, subtitleType, subtitleAmount2, subtitleType2 }) => (
     <View style={styles.itemContainer}>
-        <View style={styles.item}>
-            <Image source={image} style={styles.image} />
-            <Text style={styles.title}>{title}</Text>
-            <View style={styles.subtitleContainer}>
-                <View style={styles.subtitleRow}>
-                    <Text style={styles.subtitleAmount}>{subtitleAmount}</Text>
-                    <Text style={styles.subtitleType}>{subtitleType}</Text>
-                </View>
-
-                <View style={styles.divider} />
-
-                <View style={styles.subtitleRow}>
-                    <Text style={styles.subtitleAmount2}>{subtitleAmount2}</Text>
-                    <Text style={styles.subtitleType2}>{subtitleType2}</Text>
-                </View>
-            </View>
+        <Image source={image} style={styles.image} />
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.subtitleContainer}>
+            <Text style={styles.preco_1}>{subtitleAmount}</Text>
+            <Text style={styles.tipoCombustivel_1}>{subtitleType}</Text>
+            <View style={styles.divider} />
+            <Text style={styles.preco_2}>{subtitleAmount2}</Text>
+            <Text style={styles.tipoCombustivel_2}>{subtitleType2}</Text>
         </View>
     </View>
 );
 
 const Home = () => {
-
     const navigation = useNavigation();
-
+    const isFocused = useIsFocused();
     const [postos, setPostos] = useState([]);
 
+    useEffect(() => {
+        if (isFocused) {
+            getPostos().then(setPostos).catch(error => console.error("Erro ao carregar os postos:", error));
+        }
+    }, [isFocused]);
+
     const renderItem = ({ item }) => (
-        <List.Item
-            title="endereço"
-            subtitleAmount="valor"
-            subtitleType="tipo"
+        <Item
+            title={item.nome}
+            subtitleAmount={item.preco_1}
+            subtitleType={item.tipoCombustivel_1}
+            subtitleAmount2={item.preco_2}
+            subtitleType2={item.tipoCombustivel_2}
+            image={require('../Img/Logo/logoshell.png')} // Imagem estática
         />
     );
 
@@ -54,8 +65,8 @@ const Home = () => {
                 <FlatList
                     style={styles.flatlist}
                     data={postos}
-                    renderItem={({ item }) => <Item title={item.title} subtitleAmount={item.subtitleAmount} subtitleType={item.subtitleType} subtitleAmount2={item.subtitleAmount2} subtitleType2={item.subtitleType2} image={item.image} />}
-                    keyExtractor={item => item.id}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id.toString()}
                 />
             </Body>
             <Footer />
@@ -67,17 +78,13 @@ const styles = StyleSheet.create({
     itemContainer: {
         backgroundColor: "transparent",
         marginLeft: 5,
-
         shadowColor: "gray",
-        shadowOffset: {
-            width: 0,
-            height: 0,
-        },
+        shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.50,
         shadowRadius: 3.84,
         elevation: 5,
     },
-    item: {
+    /*item: {
         backgroundColor: "#FFFfFF",
         padding: 10,
         marginVertical: '2%',
@@ -85,8 +92,8 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 15,
         flexDirection: 'row', // Para alinhar a imagem e o título lado a lado
         alignItems: 'center', // Para centralizar verticalmente
-    },
-    title: {
+    },*/
+    endereco: {
         fontSize: 13,
         textAlign: "center",
         marginLeft: 15,
@@ -114,7 +121,7 @@ const styles = StyleSheet.create({
     divider: {
         width: '100%',
         height: 1,
-        backgroundColor: 272727,
+        backgroundColor: '#272727',
         marginVertical: 5, // Ajuste conforme necessário
       },
 
@@ -128,7 +135,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'darkgreen',
         fontWeight: 'bold',
-
        
     },
 
