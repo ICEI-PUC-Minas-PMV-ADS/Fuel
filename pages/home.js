@@ -9,6 +9,20 @@ import Footer from "../componentes/footer";
 import Body from "../componentes/body";
 import { getPostos } from '../services/PostosServicesDb';
 
+// Mapeamento de bandeiras a imagens
+const imageMap = {
+    'shell': require('../Img/Logo/logoshell.png'),
+    'ale': require('../Img/Logo/logoale.png'),
+    'br': require('../Img/Logo/logoBR.png'),
+    'ipiranga': require('../Img/Logo/logoipiranga.png'),
+};
+
+// Função para normalizar o nome da bandeira e obter a imagem correspondente
+const getBandeiraImage = (bandeira) => {
+    const normalizedBandeira = bandeira.toLowerCase().replace(/\s+/g, '');
+    return imageMap[normalizedBandeira] || require('../Img/Logo/default.png'); // Imagem padrão se não encontrar
+};
+
 const Item = ({ image, title, subtitleAmount, subtitleType, subtitleAmount2, subtitleType2 }) => (
     <View style={styles.itemContainer}>
         <View style={styles.item}>
@@ -47,7 +61,7 @@ const Home = () => {
             subtitleType={item.tipoCombustivel_1}
             subtitleAmount2={item.preco_2}
             subtitleType2={item.tipoCombustivel_2}
-            image={require('../Img/Logo/logoshell.png')} // Imagem estática
+            image={getBandeiraImage(item.bandeiraPosto)}
         />
     );
 

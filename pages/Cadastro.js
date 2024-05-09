@@ -45,15 +45,20 @@ const CadastroEstabelecimento = () => {
 
     const handleCadastro = () => {
         console.log('Iniciando cadastro do estabelecimento...');
-    if (!nome || !cnpj || !endereco || !tipoCombustivel_1 || !preco_1 || !bandeiraPosto || !outrosServicos) {
+    if (!nome || !cnpj || !endereco || !tipoCombustivel_1 || !preco_1 || !tipoCombustivel_2 || !preco_2 || !bandeiraPosto || !outrosServicos) {
         console.error('Todos os campos obrigatórios devem ser preenchidos.');
-        Alert.alert(
-            "Campos Obrigatórios",
-            "Por favor, preencha todos os campos obrigatórios.",
-            [{ text: "OK" }]
-        );
-        return; // Impede a execução se algum campo obrigatório estiver faltando
-    }
+        let message = 'Por favor, preencha todos os campos obrigatórios: ';
+        message += !nome ? 'Nome, ' : '';
+        message += !cnpj ? 'CNPJ, ' : '';
+        message += !endereco ? 'Endereço, ' : '';
+        message += !tipoCombustivel_1 ? 'Tipo de Combustível, ' : '';
+        message += !preco_1 ? 'Preço, ' : '';
+        message += !bandeiraPosto ? 'Bandeira do Posto, ' : '';
+        message += !outrosServicos ? 'Outros Serviços.' : '';
+
+    Alert.alert("Campos Obrigatórios", message, [{ text: "OK" }]);
+    return;
+}
         insertPostos({
             nome: nome,
             cnpj: cnpj,
@@ -120,7 +125,7 @@ const CadastroEstabelecimento = () => {
             <Body>
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                     <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Nome:</Text>
+                        <Text style={styles.label}>Nome:<Text style={styles.required}>*</Text></Text>
                         <TextInput
                             style={styles.input}
                             value={nome}
@@ -128,21 +133,21 @@ const CadastroEstabelecimento = () => {
                         />                  
 
 
-                    <Text style={styles.label}>CNPJ:</Text>
+                    <Text style={styles.label}>CNPJ:<Text style={styles.required}>*</Text></Text>
                     <TextInput
                         style={styles.input}
                         value={cnpj}
                         onChangeText={(value) => setCnpj(value)}
                     />
 
-                    <Text style={styles.label}>Endereço:</Text>
+                    <Text style={styles.label}>Endereço:<Text style={styles.required}>*</Text></Text>
                     <TextInput
                         style={styles.input}
                         value={endereco}
                         onChangeText={(value) => setEndereco(value)}
                     />
                     
-                    <Text style={styles.label}>Bandeira do Posto:</Text>
+                    <Text style={styles.label}>Bandeira do Posto:<Text style={styles.required}>*</Text></Text>
                     <TextInput
                         style={styles.input}
                         value={bandeiraPosto}
@@ -150,28 +155,28 @@ const CadastroEstabelecimento = () => {
                     />
                     
 
-                    <Text style={styles.label}>Tipo de Combustivel:</Text>
+                    <Text style={styles.label}>Tipo de Combustivel:<Text style={styles.required}>*</Text></Text>
                     <TextInput
                         style={styles.input}
                         value={tipoCombustivel_1}
                         onChangeText={(value) => setTipoCombustivel_1(value)}
                     />
 
-                    <Text style={styles.label}>Preço:</Text>
+                    <Text style={styles.label}>Preço:<Text style={styles.required}>*</Text></Text>
                     <TextInput
                         style={styles.input}
                         value={preco_1}
                         onChangeText={(value) => setPreco_1(value)}
                     />
 
-                    <Text style={styles.label}>Tipo de Combustivel:</Text>
+                    <Text style={styles.label}>Tipo de Combustivel:<Text style={styles.required}>*</Text></Text>
                     <TextInput
                         style={styles.input}
                         value={tipoCombustivel_2}
                         onChangeText={(value) => setTipoCombustivel_2(value)}
                     />
                     
-                    <Text style={styles.label}>Preço:</Text>
+                    <Text style={styles.label}>Preço:<Text style={styles.required}>*</Text></Text>
                     <TextInput
                         style={styles.input}
                         value={preco_2}
@@ -234,7 +239,7 @@ const CadastroEstabelecimento = () => {
                         onChangeText={(value) => setPreco_6(value)}
                     /> 
 
-                    <Text style={styles.label}>Outros Serviços:</Text>
+                    <Text style={styles.label}>Outros Serviços:<Text style={styles.required}>*</Text></Text>
                     <TextInput
                         style={styles.input}
                         value={outrosServicos}
@@ -274,7 +279,9 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         alignSelf: 'flex-start',
     },
-    
+    required: {
+        color: 'red'
+    },    
     input: {
         height: 40,
         borderColor: 'gray',
