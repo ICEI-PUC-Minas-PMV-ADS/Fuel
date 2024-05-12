@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
 
-import { insertEstabelecimento } from '../services/DbServices'; // Verifique o caminho para assegurar que está correto
+import { insertEstabelecimento, setupDatabase } from '../services/DbServices';
 
 const CadastroEstabelecimento = () => {
     const navigation = useNavigation();
@@ -18,6 +18,14 @@ const CadastroEstabelecimento = () => {
     const [bandeiraPosto, setBandeiraPosto] = useState('');
     const [outrosServicos, setOutrosServicos] = useState('');
 
+    useEffect(() => {
+        setupDatabase().then(() => {
+            console.log("Configuração banco de dados finalizado.");
+        }).catch(error => {
+            console.error("Configuração do banco de dados falhou:", error);
+        });
+    }, []);
+
     const handleCadastro = () => {
         const estabelecimento = {
             nome,
@@ -29,6 +37,7 @@ const CadastroEstabelecimento = () => {
             bandeiraPosto,
             outrosServicos,
         };
+
 
         insertEstabelecimento(estabelecimento)
             .then(() => {
@@ -46,6 +55,7 @@ const CadastroEstabelecimento = () => {
         <Header />
         <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.container}>
+            <Button title="Cadastrar Estabelecimento" onPress={handleCadastro} />
                 <Text style={styles.label}>Nome:</Text>
                 <TextInput
                     style={styles.input}
@@ -94,7 +104,7 @@ const CadastroEstabelecimento = () => {
                     value={outrosServicos}
                     onChangeText={setOutrosServicos}
                 />
-                <Button title="Cadastrar Estabelecimento" onPress={handleCadastro} />
+                
             </View>
         </ScrollView>
         <Footer />
