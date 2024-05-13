@@ -22,6 +22,7 @@ const getBandeiraImage = (bandeira) => {
     const normalizedBandeira = bandeira.toLowerCase().replace(/\s+/g, '');
     return imageMap[normalizedBandeira] || require('../Img/Logo/default.png'); // Imagem padrão se não encontrar
 };
+export {imageMap, getBandeiraImage};
 
 const Item = ({ image, title, subtitleAmount, subtitleType, subtitleAmount2, subtitleType2 }) => (
     <View style={styles.itemContainer}>

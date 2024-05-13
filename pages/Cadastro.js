@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import { useIsFocused } from '@react-navigation/native';
 import Header from '../componentes/Header';
 import Body from '../componentes/body';
 import Footer from '../componentes/footer';
 
+
 import { getPostos, insertPostos } from '../services/PostosServicesDb';
+
+import { imageMap, getBandeiraImage } from './home';
+
 
 const CadastroEstabelecimento = () => {
 
@@ -148,11 +153,16 @@ const CadastroEstabelecimento = () => {
                     />
                     
                     <Text style={styles.label}>Bandeira do Posto:<Text style={styles.required}>*</Text></Text>
-                    <TextInput
-                        style={styles.input}
-                        value={bandeiraPosto}
-                        onChangeText={(value) => setBandeiraPosto(value)}
-                    />
+                    <Picker
+                            style={styles.input}
+                            selectedValue={bandeiraPosto}
+                            onValueChange={setBandeiraPosto}
+                        >
+                            <Picker.Item label="Selecione a bandeira" value="" />
+                            {Object.keys(imageMap).map(bandeira => (
+                                <Picker.Item key={bandeira} label={bandeira} value={bandeira} />
+                            ))}
+                        </Picker>
                     
 
                     <Text style={styles.label}>Tipo de Combustivel:<Text style={styles.required}>*</Text></Text>
