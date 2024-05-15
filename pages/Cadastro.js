@@ -8,7 +8,7 @@ import Body from '../componentes/body';
 import Footer from '../componentes/footer';
 
 
-import { getPostos, insertPostos } from '../services/PostosServicesDb';
+//import { getPostos, insertPostos } from '../services/PostosServicesDb';
 
 import { imageMap, getBandeiraImage } from './home';
 
@@ -23,15 +23,15 @@ const CadastroEstabelecimento = () => {
 
     const [Postos, setPostos] = useState([]);
 
-    useEffect(() => {
-        getPostos().then(dados => {
-            setPostos(dados);
-        }).catch(error => {
-            console.error('Erro ao buscar os postos:', error);
-        });
+    //useEffect(() => {
+        //getPostos().then(dados => {
+            //setPostos(dados);
+        //}).catch(error => {
+            //console.error('Erro ao buscar os postos:', error);
+       // });
 
-        console.log('Iniciando a tela!');
-    }, []);
+       // console.log('Iniciando a tela!');
+   // }, []);
 
     const [nome, setNome] = useState('');
     const [cnpj, setCnpj] = useState('');

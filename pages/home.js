@@ -7,7 +7,7 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import Header from "../componentes/Header";
 import Footer from "../componentes/footer";
 import Body from "../componentes/body";
-import { getPostos } from '../services/PostosServicesDb';
+//import { getPostos } from '../services/PostosServicesDb';
 
 // Mapeamento de bandeiras a imagens
 const imageMap = {
@@ -49,11 +49,11 @@ const Home = () => {
     const isFocused = useIsFocused();
     const [postos, setPostos] = useState([]);
 
-    useEffect(() => {
-        if (isFocused) {
-            getPostos().then(setPostos).catch(error => console.error("Erro ao carregar os postos:", error));
-        }
-    }, [isFocused]);
+    //useEffect(() => {
+        //if (isFocused) {
+          //  getPostos().then(setPostos).catch(error => console.error("Erro ao carregar os postos:", error));
+       // }
+    //}, [isFocused]);
 
     const renderItem = ({ item }) => (
         <Item
