@@ -1,0 +1,47 @@
+{
+  "usuarios": [],
+  "postos": [
+    {
+      "id": 1,
+      "nome": "Posto Teste 1",
+      "cnpj": "11.222.333/0001-44",
+      "endereco": 6.77,
+      "bandeiraPosto": "shel",
+      "tipoCombustivel_1": "Etanol",
+      "preco_1": 1.00,
+      "tipoCombustivel_2": "Gasolina",
+      "preco_2": 2.00,
+      "tipoCombustivel_3": "Etanol",
+      "preco_3": 1.00,
+      "tipoCombustivel_4": "Gasolina",
+      "preco_4": 2.00,
+      "tipoCombustivel_5": "Etanol",
+      "preco_5": 1.00,
+      "tipoCombustivel_6": "Gasolina",
+      "preco_6": 2.00,
+      "outrosServicos": "N/A"
+    },
+
+    {
+      "id": 2,
+      "nome": "Posto Teste 2",
+      "cnpj": "00.111.222/0001-33",
+      "endereco": 6.77,
+      "bandeiraPosto": "shel",
+      "tipoCombustivel_1": "Etanol",
+      "preco_1": 1.00,
+      "tipoCombustivel_2": "Gasolina",
+      "preco_2": 2.00,
+      "tipoCombustivel_3": "Etanol",
+      "preco_3": 1.00,
+      "tipoCombustivel_4": "Gasolina",
+      "preco_4": 2.00,
+      "tipoCombustivel_5": "Etanol",
+      "preco_5": 1.00,
+      "tipoCombustivel_6": "Gasolina",
+      "preco_6": 2.00,
+      "outrosServicos": "N/A"
+    }
+
+  ]
+}
