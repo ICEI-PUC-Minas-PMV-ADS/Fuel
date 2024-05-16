@@ -1,47 +1,85 @@
 {
-  "usuarios": [],
+  "users": [
+    {
+      "id": "1",
+      "name": "Carolina Novaes",
+      "phoneNumber": "31983614979",
+      "password": "pucminas"
+    },
+    {
+      "id": "2",
+      "name": "Ruan Gonzaga",
+      "phoneNumber": "31975740194",
+      "password": "pucminas"
+    },
+    {
+      "email": "paulo.henrique@pucminas.br",
+      "password": "$2a$10$jcGzm1mXny2itb5KA/x2OeACNGQrnif0i9qrbkwx2PRW1KuJupsDO",
+      "name": "Paulo Henrique ",
+      "phoneNumber": "31991518537",
+      "id": "JXYtJof"
+    }
+  ],
   "postos": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "Posto Teste 1",
       "cnpj": "11.222.333/0001-44",
       "endereco": 6.77,
       "bandeiraPosto": "shel",
       "tipoCombustivel_1": "Etanol",
-      "preco_1": 1.00,
+      "preco_1": 1,
       "tipoCombustivel_2": "Gasolina",
-      "preco_2": 2.00,
+      "preco_2": 2,
       "tipoCombustivel_3": "Etanol",
-      "preco_3": 1.00,
+      "preco_3": 1,
       "tipoCombustivel_4": "Gasolina",
-      "preco_4": 2.00,
+      "preco_4": 2,
       "tipoCombustivel_5": "Etanol",
-      "preco_5": 1.00,
+      "preco_5": 1,
       "tipoCombustivel_6": "Gasolina",
-      "preco_6": 2.00,
+      "preco_6": 2,
       "outrosServicos": "N/A"
     },
-
     {
-      "id": 2,
+      "id": "2",
       "nome": "Posto Teste 2",
       "cnpj": "00.111.222/0001-33",
       "endereco": 6.77,
       "bandeiraPosto": "shel",
       "tipoCombustivel_1": "Etanol",
-      "preco_1": 1.00,
+      "preco_1": 1,
       "tipoCombustivel_2": "Gasolina",
-      "preco_2": 2.00,
+      "preco_2": 2,
       "tipoCombustivel_3": "Etanol",
-      "preco_3": 1.00,
+      "preco_3": 1,
       "tipoCombustivel_4": "Gasolina",
-      "preco_4": 2.00,
+      "preco_4": 2,
       "tipoCombustivel_5": "Etanol",
-      "preco_5": 1.00,
+      "preco_5": 1,
       "tipoCombustivel_6": "Gasolina",
-      "preco_6": 2.00,
+      "preco_6": 2,
       "outrosServicos": "N/A"
+    },
+    {
+      "id": "3",
+      "nome": "Posto Teste 3",
+      "cnpj": "23.456.325/0001-25",
+      "endereco": "Av. Amazonas 4085",
+      "bandeiraPosto": "ipiranga",
+      "tipoCombustivel_1": "Etanol",
+      "preco_1": 3.56,
+      "tipoCombustivel_2": "Gasolina",
+      "preco_2": 5.89,
+      "tipoCombustivel_3": "Diesel",
+      "preco_3": 4.85,
+      "tipoCombustivel_4": "Gasolina",
+      "preco_4": 5.01,
+      "tipoCombustivel_5": "Etanol",
+      "preco_5": 4.56,
+      "tipoCombustivel_6": "Gasolina",
+      "preco_6": 4.99,
+      "outrosServicos": "Lavanderia"
     }
-
   ]
 }

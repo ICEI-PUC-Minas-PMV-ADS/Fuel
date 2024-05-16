@@ -1,0 +1,23 @@
+### USUARIOS
+GET http://localhost:3000/users
+
+### REGISTER
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "name": "Paulo Henrique ",
+    "email": "paulo.henrique@pucminas.br",
+    "phoneNumber": "31991518537",
+    "password": "abacaxi"
+}
+
+### LOGIN
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "paulo.henrique@pucminas.br",
+    "password": "abacaxi"
+}
+
