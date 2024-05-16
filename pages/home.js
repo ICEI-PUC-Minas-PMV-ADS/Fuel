@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, FlatList, Image } from "react-native";
 import { useNavigation, useIsFocused } from '@react-navigation/native';
+import postData from '../db.json'
+
 
 
 //IMPORTAÇÕES DE COMPONENTES
@@ -47,13 +49,13 @@ const Item = ({ image, title, subtitleAmount, subtitleType, subtitleAmount2, sub
 const Home = () => {
     const navigation = useNavigation();
     const isFocused = useIsFocused();
-    const [postos, setPostos] = useState([]);
+    const [postos, setPostos] = useState(postData.postos);
 
-    //useEffect(() => {
-        //if (isFocused) {
-          //  getPostos().then(setPostos).catch(error => console.error("Erro ao carregar os postos:", error));
-       // }
-    //}, [isFocused]);
+    useEffect(() => {
+        if (isFocused) {
+            setPostos(postData.postos);
+        }
+    }, [isFocused]);
 
     const renderItem = ({ item }) => (
         <Item
