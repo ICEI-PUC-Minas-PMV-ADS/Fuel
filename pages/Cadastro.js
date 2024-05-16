@@ -8,9 +8,9 @@ import Body from '../componentes/body';
 import Footer from '../componentes/footer';
 
 
-//import { getPostos, insertPostos } from '../services/PostosServicesDb';
+import { getPostos, updatePostos, insertPostos, deletePostos } from '../services/postos.service';
 
-import { imageMap, getBandeiraImage } from './home';
+import { imageMap } from './home';
 
 const tiposCombustivel = ['Etanol', 'Gasolina Comum', 'Gasolina Aditivada', 'Gasolina Premium', 'Diesel'];
 
@@ -23,15 +23,17 @@ const CadastroEstabelecimento = () => {
 
     const [Postos, setPostos] = useState([]);
 
-    //useEffect(() => {
-        //getPostos().then(dados => {
-            //setPostos(dados);
-        //}).catch(error => {
-            //console.error('Erro ao buscar os postos:', error);
-       // });
-
-       // console.log('Iniciando a tela!');
-   // }, []);
+    useEffect(() => {
+        if (isFocused) {
+          getPostos().then(dados => {
+            setPostos(dados);
+          }).catch(error => {
+            console.error('Erro ao buscar os postos:', error);
+          });
+    
+          console.log('Iniciando a tela!');
+        }
+      }, [isFocused]);
 
     const [nome, setNome] = useState('');
     const [cnpj, setCnpj] = useState('');
