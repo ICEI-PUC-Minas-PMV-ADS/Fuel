@@ -66,22 +66,23 @@ const Home = () => {
             <View style={styles.item}>
                 <Image source={getBandeiraImage(item.bandeiraPosto)} style={styles.image} />
                 <View style={styles.textContainer}>
-                    <Text style={styles.title}>{item.endereco}</Text>
-                    <View style={styles.subtitleContainer}>
-                        <View style={styles.subtitleRow}>
-                            <Text style={styles.preco_1}>{item.preco_1}</Text>
-                            <Text style={styles.tipoCombustivel_1}>{item.tipoCombustivel_1}</Text>
-                        </View>
-                        <View style={styles.divider} />
-                        <View style={styles.subtitleRow}>
-                            <Text style={styles.preco_2}>{item.preco_2}</Text>
-                            <Text style={styles.tipoCombustivel_2}>{item.tipoCombustivel_2}</Text>
-                        </View>
+                    <Text style={styles.endereco}>{item.endereco}</Text>
+                </View>
+                <View style={styles.priceContainer}>
+                    <View style={styles.subtitleColumn}>
+                        <Text style={styles.preco}>{item.preco_1}</Text>
+                        <Text style={styles.tipoCombustivel}>{item.tipoCombustivel_1}</Text>
+                    </View>
+                    <View style={styles.divider} />
+                    <View style={styles.subtitleColumn}>
+                        <Text style={styles.preco}>{item.preco_2}</Text>
+                        <Text style={styles.tipoCombustivel}>{item.tipoCombustivel_2}</Text>
                     </View>
                 </View>
             </View>
         </TouchableOpacity>
     );
+    
     
 
     return (
@@ -117,53 +118,46 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     item: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: 'row', // Para alinhar a imagem e o título lado a lado
+        alignItems: 'center', // Para centralizar verticalmente
     },
     image: {
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
         marginRight: 15,
     },
     textContainer: {
         flex: 1,
     },
-    title: {
+    endereco: {
         fontSize: 16,
         fontWeight: 'bold',
-        marginBottom: 5,
+        textAlign: 'center',
     },
     subtitleContainer: {
         flexDirection: 'column',
     },
-    subtitleRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
+    subtitleColumn: {
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        marginBottom: 5,
     },
-    preco_1: {
-        fontSize: 14,
+    preco: {
+        fontSize: 16,
         color: 'darkgreen',
         fontWeight: 'bold',
-        marginRight: 5,
     },
-    tipoCombustivel_1: {
-        fontSize: 14,
-        color: 'darkgreen',
-    },
-    preco_2: {
-        fontSize: 14,
+    tipoCombustivel: {
+        fontSize: 16,
         color: 'darkgreen',
         fontWeight: 'bold',
-        marginRight: 5,
     },
-    tipoCombustivel_2: {
-        fontSize: 14,
-        color: 'darkgreen',
-    },
-    divider: {
+    divider: { //Linha que divide preço e tipo de combustivel
+        width: '40%',
         height: 1,
         backgroundColor: '#272727',
         marginVertical: 5,
+        alignSelf: 'flex-end',
     },
     flatlist: {
         flex: 1,

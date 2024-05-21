@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 //IMPORTAÇÕES DE COMPONENTES
 import Header from '../componentes/Header';
@@ -17,15 +18,26 @@ const imageMap = {
 
 // Função para normalizar o nome da bandeira e obter a imagem correspondente
 const getBandeiraImage = (bandeira) => {
+    if (!bandeira) return require('../Img/Logo/default.png');
     const normalizedBandeira = bandeira.toLowerCase().replace(/\s+/g, '');
     return imageMap[normalizedBandeira] || require('../Img/Logo/default.png'); // Imagem padrão se não encontrar
 };
-export { imageMap, getBandeiraImage };
 
 const Postos = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const { posto } = route.params;
+    const [rating, setRating] = useState(0); // Estado para a avaliação
+
+    // Criar uma lista de combustíveis com seus preços
+    const combustiveis = [];
+    for (let i = 1; i <= 6; i++) {
+        const tipoCombustivel = posto[`tipoCombustivel_${i}`];
+        const preco = posto[`preco_${i}`];
+        if (tipoCombustivel && preco) {
+            combustiveis.push({ tipoCombustivel, preco });
+        }
+    }
 
     return (
         <>
@@ -33,29 +45,53 @@ const Postos = () => {
             <Body>
                 <View style={styles.itemContainer}>
                     <View style={styles.section}>
-                        <Text style={styles.title}>{posto.endereco}</Text>
+                        <View style={styles.titleContainer}>
+                            <View style={styles.bandeiraContainer}>
+                                <Image source={getBandeiraImage(posto.bandeiraPosto)} style={styles.bandeira} />
+                            </View>
+                            <View style={styles.textContainer}>
+                                <Text style={styles.postoNome}>{posto.nome}</Text>
+                                <Text style={styles.endereco}>{posto.endereco}</Text>
+                            </View>
+                        </View>
                     </View>
                     <View style={styles.divider} />
-
+    
                     <View style={styles.section}>
                         <Text style={styles.sectionTitle}>Combustíveis Disponíveis</Text>
-                        <Text style={styles.preco}>{posto.tipoCombustivel_1}: {posto.preco_1}</Text>
-                        <Text style={styles.preco}>{posto.tipoCombustivel_2}: {posto.preco_2}</Text>
+                        <View style={styles.combustivelContainer}>
+                            {combustiveis.map((combustivel, index) => (
+                                <View key={index} style={styles.combustivelBox}>
+                                    <Text style={styles.preco}>{combustivel.preco}</Text>
+                                    <Text style={styles.combustivelTipo}>{combustivel.tipoCombustivel}</Text>
+                                </View>
+                            ))}
+                        </View>
                     </View>
                     <View style={styles.divider} />
-
+    
                     <View style={styles.section}>
                         <Text style={styles.sectionTitle}>Outros Serviços</Text>
-                        {/* Adicione aqui os outros serviços oferecidos */}
+                        <Text style={styles.servico}>{posto.outrosServicos}</Text>
                     </View>
                     <View style={styles.divider} />
-
+    
                     <View style={styles.section}>
                         <Text style={styles.sectionTitle}>Avaliação</Text>
-                        {/* Adicione aqui a funcionalidade para avaliar o posto */}
+                        <View style={styles.estrelasContainer}>
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <TouchableOpacity key={star} onPress={() => setRating(star)}>
+                                    <FontAwesome
+                                        name={star <= rating ? 'star' : 'star-o'}
+                                        size={30}
+                                        color="#FFD700"
+                                    />
+                                </TouchableOpacity>
+                            ))}
+                        </View>
                     </View>
                     <View style={styles.divider} />
-
+    
                     <View style={styles.section}>
                         <TouchableOpacity style={styles.buttonMapa} onPress={() => navigation.navigate('Maps')}>
                             <Image source={require('../Img/Icones/mapa.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
@@ -67,7 +103,7 @@ const Postos = () => {
             <Footer />
         </>
     );
-};
+}
 
 const styles = StyleSheet.create({
     itemContainer: {
@@ -88,16 +124,63 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
         borderBottomWidth: 1,
     },
-    title: {
-        fontSize: 18,
+    titleContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    bandeiraContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 10,
+    },
+    textContainer: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+    },
+    bandeira: {
+        width: 70,
+        height: 70,
+    },
+    postoNome: {
+        fontSize: 30,
+        fontWeight: 'bold',
+    },
+    endereco: {
+        fontSize: 20,
         fontWeight: 'bold',
     },
     sectionTitle: {
         fontSize: 16,
         fontWeight: 'bold',
     },
+    combustivelContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+    },
+    combustivelBox: {
+        backgroundColor: '#f2f2f2',
+        borderRadius: 15,
+        padding: 10,
+        margin: 5,
+        alignItems: 'center',
+        width: '45%',
+    },
     preco: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    combustivelTipo: {
         fontSize: 14,
+        color: '#555',
+    },
+    servico: {
+        fontSize: 14,
+        paddingVertical: 2,
+    },
+    estrelasContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center', // Centralizar as estrelas
     },
     buttonMapa: {
         flexDirection: 'row',
