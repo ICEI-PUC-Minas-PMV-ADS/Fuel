@@ -38,6 +38,8 @@ const CadastroEstabelecimento = () => {
     const [nome, setNome] = useState('');
     const [cnpj, setCnpj] = useState('');
     const [endereco, setEndereco] = useState('');
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
     const [tipoCombustivel_1, setTipoCombustivel_1] = useState('');
     const [tipoCombustivel_2, setTipoCombustivel_2] = useState('');
     const [tipoCombustivel_3, setTipoCombustivel_3] = useState('');
@@ -61,6 +63,8 @@ const CadastroEstabelecimento = () => {
             message += !nome ? 'Nome, ' : '';
             message += !cnpj ? 'CNPJ, ' : '';
             message += !endereco ? 'Endereço, ' : '';
+            message += !latitude ? 'Latitude, ' : '';
+            message += !longitude ? 'Longitude, ' : '';
             message += !tipoCombustivel_1 ? 'Tipo de Combustível, ' : '';
             message += !preco_1 ? 'Preço, ' : '';
             message += !bandeiraPosto ? 'Bandeira do Posto, ' : '';
@@ -73,6 +77,8 @@ const CadastroEstabelecimento = () => {
             nome: nome,
             cnpj: cnpj,
             endereco: endereco,
+            latitude: latitude,
+            longitude: longitude,
             bandeiraPosto: bandeiraPosto,
             tipoCombustivel_1: tipoCombustivel_1 || null,
             preco_1: preco_1 || null,
@@ -106,6 +112,8 @@ const CadastroEstabelecimento = () => {
                     nome: nome,
                     cnpj: cnpj,
                     endereco: endereco,
+                    latitude: latitude,
+                    longitude: longitude,
                     bandeiraPosto: bandeiraPosto,
                     tipoCombustivel_1: tipoCombustivel_1 || null,
                     preco_1: preco_1 || null,
@@ -155,6 +163,20 @@ const CadastroEstabelecimento = () => {
                             style={styles.input}
                             value={endereco}
                             onChangeText={(value) => setEndereco(value)}
+                        />
+
+                        <Text style={styles.label}>Latitude:<Text style={styles.required}>*</Text></Text>
+                        <TextInput
+                            style={styles.input}
+                            value={latitude}
+                            onChangeText={(value) => setLatitude(value)}
+                        />
+
+                        <Text style={styles.label}>Longitude:<Text style={styles.required}>*</Text></Text>
+                        <TextInput
+                            style={styles.input}
+                            value={longitude}
+                            onChangeText={(value) => setLongitude(value)}
                         />
 
                         <Text style={styles.label}>Bandeira do Posto:<Text style={styles.required}>*</Text></Text>
