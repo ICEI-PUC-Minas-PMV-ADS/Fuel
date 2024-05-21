@@ -1,33 +1,33 @@
-import React, { useState, createRef } from 'react';
-import { StyleSheet, View, Dimensions, Text, Image } from 'react-native';
-import { Appbar } from 'react-native-paper';
-import DropDownPicker from 'react-native-dropdown-picker';
-import MapView, { Marker } from 'react-native-maps';
-import Header from '../componentes/Header';
-import Footer from '../componentes/footer';
+import React, { useState, createRef } from "react";
+import { StyleSheet, View, Dimensions, Text, Image } from "react-native";
+import { Appbar, Button } from "react-native-paper";
+import DropDownPicker from "react-native-dropdown-picker";
+import MapView, { Marker } from "react-native-maps";
+import Header from "../componentes/Header";
+import Footer from "../componentes/footer";
 
 export default function Mapa() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState({
     latitude: -19.92246,
     longitude: -43.97385,
-    label: 'Posto Ipiranga',
+    label: "Posto Ipiranga",
   });
   const [items, setItems] = useState([
     {
-      label: 'Posto Shell',
+      label: "Posto Shell",
       value: {
-        latitude: -19.55297,
-        longitude: -43.55541,
-        label: 'Posto Shell',
+        latitude: -19.9169,
+        longitude: -43.965,
+        label: "Posto Shell",
       },
     },
     {
-      label: 'Posto Quick-Petrobrás',
+      label: "Posto Quick-Petrobrás",
       value: {
-        latitude: -19.91939,
-        longitude: -43.96950,
-        label: 'Posto Quick-Petrobrás',
+        latitude: -19.91944,
+        longitude: -43.96942,
+        label: "Posto Quick-Petrobrás",
       },
     },
   ]);
@@ -54,7 +54,7 @@ export default function Mapa() {
             longitude: value.longitude,
             latitudeDelta: 0.005,
             longitudeDelta: 0.005,
-          })
+          });
         }}
       />
       <MapView
@@ -65,17 +65,19 @@ export default function Mapa() {
           longitude: value.longitude,
           latitudeDelta: 0.005,
           longitudeDelta: 0.005,
-        }}>
+        }}
+      >
         <Marker
           coordinate={{
             latitude: value.latitude,
             longitude: value.longitude,
           }}
         >
-          <View style={{ alignItems: 'center' }}>
+          <View style={{ alignItems: "center" }}>
             <Text style={styles.title}>{value.label}</Text>
+
             <Image
-              source={require('../Img/Logo/logoshell.png')}
+              source={require("../Img/Logo/logoipiranga.png")}
               style={styles.imageStyle}
             />
           </View>
@@ -92,15 +94,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 12,
-    color: '#FFF',
-    backgroundColor: 'gray',
+    color: "#FFF",
+    backgroundColor: "gray",
     padding: 5,
     borderRadius: 5,
   },
   imageStyle: {
-    width: 50,
-    height: 50,
-    resizeMode: 'contain',  
+    width: 25,
+    height: 25,
+    resizeMode: "contain",
   },
 });
-
