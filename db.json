@@ -24,6 +24,8 @@
     {
       "id": "1",
       "nome": "Posto Teste 1",
+      "latitude": -19.95347,
+      "longitude": -43.99430,
       "cnpj": "11.222.333/0001-44",
       "endereco": "Rua Juatuba 10, Vista Alegre",
       "bandeiraPosto": "shell",
@@ -44,6 +46,8 @@
     {
       "id": "2",
       "nome": "Posto Teste 2",
+      "latitude": -19.95697,
+      "longitude": -43.99305,
       "cnpj": "00.111.222/0001-33",
       "endereco": "Av. Teresa Cristina 9793, Betania",
       "bandeiraPosto": "br",
@@ -64,6 +68,8 @@
     {
       "id": "3",
       "nome": "Posto Teste 3",
+      "latitude": -19.92979,
+      "longitude": -43.96004,
       "cnpj": "23.456.325/0001-25",
       "endereco": "Av. Amazonas 2994, Barroca",
       "bandeiraPosto": "ipiranga",
@@ -84,6 +90,8 @@
     {
       "id": "4",
       "nome": "Posto Teste 4",
+      "latitude": -19.96615,
+      "longitude": -43.99215,
       "cnpj": "23.456.325/0001-25",
       "endereco": "R. Úrsula Paulino, 2100 - Betânia",
       "bandeiraPosto": "ale",
@@ -103,9 +111,11 @@
     },
     {
       "nome": "Posto Teste 5",
+      "latitude": -19.96505,
+      "longitude": -44.01579,
       "cnpj": "12.123.123/0001-99",
-      "endereco": "Av. Cardeal Eugenio Pacceli,  900",
-      "bandeiraPosto": "br",
+      "endereco": "Av. Tito Fulgêncio, 950 - Jardim Industrial",
+      "bandeiraPosto": "ipiranga",
       "tipoCombustivel_1": "Etanol",
       "preco_1": "2.00",
       "tipoCombustivel_2": "Gasolina Comum",

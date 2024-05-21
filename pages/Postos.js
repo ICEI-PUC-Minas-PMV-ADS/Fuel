@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -93,7 +93,14 @@ const Postos = () => {
                     <View style={styles.divider} />
     
                     <View style={styles.section}>
-                        <TouchableOpacity style={styles.buttonMapa} onPress={() => navigation.navigate('Maps')}>
+                    <TouchableOpacity // Ajuste do botão para passar as coordenadas
+                            style={styles.buttonMapa} 
+                            onPress={() => navigation.navigate('Maps', {
+                                latitude: posto.latitude,
+                                longitude: posto.longitude,
+                                label: posto.nome
+                            })}
+                        >
                             <Image source={require('../Img/Icones/mapa.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
                             <Text style={styles.buttonMapaText}>Abrir Mapa</Text>
                         </TouchableOpacity>
