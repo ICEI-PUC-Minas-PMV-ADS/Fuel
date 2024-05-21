@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, FlatList, Image } from "react-native";
+import { View, StyleSheet, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import postData from '../db.json'
 
@@ -51,6 +51,10 @@ const Home = () => {
     const isFocused = useIsFocused();
     const [postos, setPostos] = useState(postData.postos);
 
+    const handlePostoSelect = (posto) => {
+        navigation.navigate('Postos', { posto });
+    };
+
     useEffect(() => {
         if (isFocused) {
             setPostos(postData.postos);
@@ -58,15 +62,27 @@ const Home = () => {
     }, [isFocused]);
 
     const renderItem = ({ item }) => (
-        <Item
-            title={item.endereco}
-            subtitleAmount={item.preco_1}
-            subtitleType={item.tipoCombustivel_1}
-            subtitleAmount2={item.preco_2}
-            subtitleType2={item.tipoCombustivel_2}
-            image={getBandeiraImage(item.bandeiraPosto)}
-        />
+        <TouchableOpacity style={styles.itemContainer} onPress={() => handlePostoSelect(item)}>
+            <View style={styles.item}>
+                <Image source={getBandeiraImage(item.bandeiraPosto)} style={styles.image} />
+                <View style={styles.textContainer}>
+                    <Text style={styles.title}>{item.endereco}</Text>
+                    <View style={styles.subtitleContainer}>
+                        <View style={styles.subtitleRow}>
+                            <Text style={styles.preco_1}>{item.preco_1}</Text>
+                            <Text style={styles.tipoCombustivel_1}>{item.tipoCombustivel_1}</Text>
+                        </View>
+                        <View style={styles.divider} />
+                        <View style={styles.subtitleRow}>
+                            <Text style={styles.preco_2}>{item.preco_2}</Text>
+                            <Text style={styles.tipoCombustivel_2}>{item.tipoCombustivel_2}</Text>
+                        </View>
+                    </View>
+                </View>
+            </View>
+        </TouchableOpacity>
     );
+    
 
     return (
         <>
@@ -86,81 +102,71 @@ const Home = () => {
 
 const styles = StyleSheet.create({
     itemContainer: {
-        backgroundColor: "transparent",
-        marginLeft: 5,
-        shadowColor: "gray",
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.50,
+        backgroundColor: "#FFFfFF",
+        borderRadius: 15,
+        padding: 10,
+        marginHorizontal: 20,
+        marginVertical: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
     },
     item: {
-        backgroundColor: "#FFFfFF",
-        padding: 10,
-        marginVertical: '2%',
-        borderTopLeftRadius: 15,
-        borderBottomLeftRadius: 15,
-        flexDirection: 'row', // Para alinhar a imagem e o título lado a lado
-        alignItems: 'center', // Para centralizar verticalmente
-    },
-    title: {
-        fontSize: 13,
-        textAlign: "center",
-        marginLeft: 15,
-        marginRight: 15,
-        flex: 1,
-    },
-    subtitleRow: {
+        flexDirection: 'row',
         alignItems: 'center',
-        verticalAlign: 'center',
-    },
-    preco_1: {
-        fontSize: 16,
-        color: 'darkgreen',
-        fontWeight: 'bold',
-        marginRight: 10,
-        
-    },
-    tipoCombustivel_1: {
-        fontSize: 16,
-        color: 'darkgreen',
-        fontWeight: 'bold',
-        marginRight: 10,
-        
-    },
-    divider: {
-        width: '100%',
-        height: 1,
-        backgroundColor: '#272727',
-        marginVertical: 5, // Ajuste conforme necessário
-      },
-
-    preco_2: {
-        fontSize: 16,
-        color: 'darkgreen',
-        fontWeight: 'bold',
-        marginRight: 10,
-
-    },
-    tipoCombustivel_2: {
-        fontSize: 16,
-        color: 'darkgreen',
-        fontWeight: 'bold',
-        marginRight: 10,
-       
     },
     image: {
         width: 50,
-        height: 45,
+        height: 50,
+        marginRight: 15,
     },
-    flatlist: {
+    textContainer: {
         flex: 1,
-        marginStart: 15,
-        width: '100%',
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5,
     },
     subtitleContainer: {
         flexDirection: 'column',
+    },
+    subtitleRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    preco_1: {
+        fontSize: 14,
+        color: 'darkgreen',
+        fontWeight: 'bold',
         marginRight: 5,
+    },
+    tipoCombustivel_1: {
+        fontSize: 14,
+        color: 'darkgreen',
+    },
+    preco_2: {
+        fontSize: 14,
+        color: 'darkgreen',
+        fontWeight: 'bold',
+        marginRight: 5,
+    },
+    tipoCombustivel_2: {
+        fontSize: 14,
+        color: 'darkgreen',
+    },
+    divider: {
+        height: 1,
+        backgroundColor: '#272727',
+        marginVertical: 5,
+    },
+    flatlist: {
+        flex: 1,
     },
 });
 
