@@ -16,7 +16,7 @@
     "@react-navigation/native-stack": "^6.9.26",
     "axios": "^1.6.8",
     "expo": "^51.0.0",
-    "expo-image-picker": "~15.0.4",
+    "expo-image-picker": "~15.0.5",
     "expo-sqlite": "~14.0.3",
     "expo-status-bar": "~1.12.1",
     "json-server-auth": "^2.1.0",

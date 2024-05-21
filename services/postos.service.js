@@ -1,71 +1,41 @@
 import API from './webapi.service';
-import { BASE_URL } from './urls'
 
 export const getPostos = async () => {
-    try{
-        return await API.get(`${BASE_URL}/postos`).then(
-            response =>{
-                return response.data;
-            },
-            error =>{
-                console.log(error);
-                return null;
-            }
-        );
-    }catch(error){
-        console.log(error);
-        return null;
+    try {
+        const response = await API.get('/postos');
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar os postos:', error);
+        throw error;
     }
 }
 
-
 export const insertPostos = async (param) => {
-    try{
-        return await API.post(`${BASE_URL}/postos`, param).then(
-            response =>{
-                return response.data;
-            },
-            error =>{
-                console.log(error);
-                return null;
-            }
-        );
-    }catch(error){
-        console.log(error);
-        return null;
+    try {
+        const response = await API.post('/postos', param);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao inserir posto:', error);
+        throw error;
     }
 }
 
 export const updatePostos = async (param) => {
-    try{
-        return await API.put(`${BASE_URL}/postos/${param.id}`, param).then(
-            response =>{
-                return response.data;
-            },
-            error =>{
-                console.log(error);
-                return null;
-            }
-        );
-    }catch(error){
-        console.log(error);
-        return null;
+    try {
+        const response = await API.put(`/postos/${param.id}`, param);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao atualizar posto:', error);
+        throw error;
     }
 }
 
 export const deletePostos = async (id) => {
-    try{
-        return await API.delete(`${BASE_URL}/postos/${id}`, param).then(
-            response =>{
-                return response.data;
-            },
-            error =>{
-                console.log(error);
-                return null;
-            }
-        );
-    }catch(error){
-        console.log(error);
-        return null;
+    try {
+        const response = await API.delete(`/postos/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao deletar posto:', error);
+        throw error;
     }
 }

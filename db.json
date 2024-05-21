@@ -78,7 +78,7 @@
       "tipoCombustivel_5": "Diesel",
       "preco_5": 4.56,
       "tipoCombustivel_6": "N/A",
-      "preco_6": 0.00,
+      "preco_6": 0,
       "outrosServicos": "Lavanderia"
     },
     {
@@ -98,8 +98,28 @@
       "tipoCombustivel_5": "Diesel",
       "preco_5": 4.46,
       "tipoCombustivel_6": "N/A",
-      "preco_6": 0.00,
+      "preco_6": 0,
       "outrosServicos": "Lavanderia, Lava-Jato, Alinhamento, Loja de Conveniência"
+    },
+    {
+      "nome": "Posto Teste 5",
+      "cnpj": "12.123.123/0001-99",
+      "endereco": "Av. Cardeal Eugenio Pacceli,  900",
+      "bandeiraPosto": "br",
+      "tipoCombustivel_1": "Etanol",
+      "preco_1": "2.00",
+      "tipoCombustivel_2": "Gasolina Comum",
+      "preco_2": "2.50",
+      "tipoCombustivel_3": "Gasolina Aditivada",
+      "preco_3": "3.00",
+      "tipoCombustivel_4": "Gasolina Premium",
+      "preco_4": "3.50",
+      "tipoCombustivel_5": "Diesel",
+      "preco_5": "4",
+      "tipoCombustivel_6": null,
+      "preco_6": null,
+      "outrosServicos": "Lava-Jato, Alinhamento, Loja de Conveniencia, Borracharia",
+      "id": "i9uWCPl"
     }
   ]
 }
