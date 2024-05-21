@@ -158,8 +158,9 @@ const CadastroEstabelecimento = () => {
                         />
 
                         <Text style={styles.label}>Bandeira do Posto:<Text style={styles.required}>*</Text></Text>
+                        <View style={styles.pickerContainer}>
                         <Picker
-                            style={styles.input}
+                            style={styles.picker}
                             selectedValue={bandeiraPosto}
                             onValueChange={setBandeiraPosto}
                         >
@@ -168,6 +169,7 @@ const CadastroEstabelecimento = () => {
                                 <Picker.Item key={bandeira} label={bandeira} value={bandeira} />
                             ))}
                         </Picker>
+                        </View>
 
 
                         <Text style={styles.label}>Tipo de Combustivel:<Text style={styles.required}>*</Text></Text>
@@ -348,7 +350,7 @@ const styles = StyleSheet.create({
     },
 
     pickerContainer: {
-        borderColor: 'gray',
+        borderColor: 'grey',
         borderWidth: 1,
         borderRadius: 5, // Opcional: Adicione bordas arredondadas para uma aparência mais suave
         marginBottom: 10,
