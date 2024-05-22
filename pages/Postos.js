@@ -98,7 +98,8 @@ const Postos = () => {
                             onPress={() => navigation.navigate('Maps', {
                                 latitude: posto.latitude,
                                 longitude: posto.longitude,
-                                label: posto.nome
+                                label: posto.nome,
+                                bandeiraPosto: posto.bandeiraPosto
                             })}
                         >
                             <Image source={require('../Img/Icones/mapa.png')} style={{ width: 24, height: 24, marginRight: 10 }} />

@@ -6,9 +6,25 @@ import MapView, { Marker } from "react-native-maps";
 import Header from "../componentes/Header";
 import Footer from "../componentes/footer";
 
+// Mapeamento de bandeiras a imagens
+const imageMap = {
+  'shell': require('../Img/Logo/logoshell.png'),
+  'ale': require('../Img/Logo/logoale.png'),
+  'br': require('../Img/Logo/logoBR.png'),
+  'ipiranga': require('../Img/Logo/logoipiranga.png'),
+};
+
+// Função para normalizar o nome da bandeira e obter a imagem correspondente
+const getBandeiraImage = (bandeira) => {
+  if (!bandeira) return require('../Img/Logo/default.png');
+  const normalizedBandeira = bandeira.toLowerCase().replace(/\s+/g, '');
+  return imageMap[normalizedBandeira] || require('../Img/Logo/default.png'); // Imagem padrão se não encontrar
+};
+
+
 export default function Maps({ route }) {
   const mapRef = createRef();
-  const { latitude, longitude, label } = route.params;
+  const { latitude, longitude, label, bandeiraPosto } = route.params;
 
   useEffect(() => { // Ajuste das coordenadas no mapa
     if (mapRef.current) {
@@ -47,7 +63,7 @@ export default function Maps({ route }) {
             <Text style={styles.title}>{label}</Text>
 
             <Image
-              source={require("../Img/Logo/logoipiranga.png")}
+              source={getBandeiraImage(bandeiraPosto)}
               style={styles.imageStyle}
             />
           </View>
@@ -70,8 +86,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   imageStyle: {
-    width: 25,
-    height: 25,
-    resizeMode: "contain",
+    width: 37,
+    height: 35,
+    //resizeMode: "center",
   },
 });
