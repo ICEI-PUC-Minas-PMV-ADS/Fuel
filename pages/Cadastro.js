@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { useNavigation } from '@react-navigation/native';
-import { useIsFocused } from '@react-navigation/native';
+import { useNavigation, useIsFocused, useRoute } from '@react-navigation/native';
 import Header from '../componentes/Header';
 import Body from '../componentes/body';
 import Footer from '../componentes/footer';
@@ -20,20 +19,23 @@ const CadastroEstabelecimento = () => {
 
     const navigation = useNavigation();
     const isFocused = useIsFocused();
-
+    const route = useRoute();
     const [Postos, setPostos] = useState([]);
+    const posto = route.params?.posto;
+
+
 
     useEffect(() => {
         if (isFocused) {
-          getPostos().then(dados => {
-            setPostos(dados);
-          }).catch(error => {
-            console.error('Erro ao buscar os postos:', error);
-          });
-    
-          console.log('Iniciando a tela!');
+            getPostos().then(dados => {
+                setPostos(dados);
+            }).catch(error => {
+                console.error('Erro ao buscar os postos:', error);
+            });
+
+            console.log('Iniciando a tela!');
         }
-      }, [isFocused]);
+    }, [isFocused]);
 
     const [nome, setNome] = useState('');
     const [cnpj, setCnpj] = useState('');
@@ -54,6 +56,33 @@ const CadastroEstabelecimento = () => {
     const [preco_6, setPreco_6] = useState('');
     const [bandeiraPosto, setBandeiraPosto] = useState('');
     const [outrosServicos, setOutrosServicos] = useState('');
+
+    useEffect(() => {
+        if (posto) {
+            setNome(posto.nome);
+            setEndereco(posto.endereco);
+            setCnpj(posto.cnpj);
+            setBandeiraPosto(posto.bandeiraPosto);
+            setLatitude(posto.latitude);
+            setLongitude(posto.longitude);
+            setTipoCombustivel_1(posto.tipoCombustivel_1)
+            setTipoCombustivel_2(posto.tipoCombustivel_2)
+            setTipoCombustivel_3(posto.tipoCombustivel_3)
+            setTipoCombustivel_4(posto.tipoCombustivel_4)
+            setTipoCombustivel_5(posto.tipoCombustivel_5)
+            setTipoCombustivel_6(posto.tipoCombustivel_6)
+            setPreco_1(posto.preco_1)
+            setPreco_2(posto.preco_2)
+            setPreco_3(posto.preco_3)
+            setPreco_4(posto.preco_4)
+            setPreco_5(posto.preco_5)
+            setPreco_6(posto.preco_6)
+            setOutrosServicos(posto.outrosServicos)
+
+        }
+    }, [posto]);
+
+    //LOGICA PARA CADASTRAR POSTO 
 
     const handleCadastro = () => {
         console.log('Iniciando cadastro do estabelecimento...');
@@ -103,9 +132,38 @@ const CadastroEstabelecimento = () => {
             });
     };
 
+    //LOGICA PARA ATUALIZAR POSTO
+
     const handleSalvar = () => {
 
-        if (!item) {
+        if (posto) {
+            updatePostos({
+                id: posto.id,
+                nome: nome,
+                cnpj: cnpj,
+                endereco: endereco,
+                latitude: latitude,
+                longitude: longitude,
+                bandeiraPosto: bandeiraPosto,
+                tipoCombustivel_1: tipoCombustivel_1 || null,
+                preco_1: preco_1 || null,
+                tipoCombustivel_2: tipoCombustivel_2 || null,
+                preco_2: preco_2 || null,
+                tipoCombustivel_3: tipoCombustivel_3 || null,
+                preco_3: preco_3 || null,
+                tipoCombustivel_4: tipoCombustivel_4 || null,
+                preco_4: preco_4 || null,
+                tipoCombustivel_5: tipoCombustivel_5 || null,
+                preco_5: preco_5 || null,
+                tipoCombustivel_6: tipoCombustivel_6 || null,
+                preco_6: preco_6 || null,
+                outrosServicos: outrosServicos || null,
+            }).then(res => {
+                navigation.goBack();
+                
+            });
+
+        } else {
 
             insertPostos(
                 {
@@ -129,13 +187,24 @@ const CadastroEstabelecimento = () => {
                     preco_6: preco_6 || null,
                     outrosServicos: outrosServicos || null,
                 }
-            ).then();
+            ).then(res => {
+                navigation.goBack();
+            });
         }
 
-        navigation.goBack();
-
     };
+    // LOGICA PARA EXCLUIR POSTO
 
+    const handleExcluir = () => {
+        deletePostos(item.cnpj).then(res => {
+            navigation.goBack();
+        });
+    }
+
+    //LOGICA PARA CANCELAR A ATUALIZAÇÃO
+    const handleCancelar = () => {
+        navigation.navigate('Home');
+    };
 
     return (
         <>
@@ -181,16 +250,16 @@ const CadastroEstabelecimento = () => {
 
                         <Text style={styles.label}>Bandeira do Posto:<Text style={styles.required}>*</Text></Text>
                         <View style={styles.pickerContainer}>
-                        <Picker
-                            style={styles.picker}
-                            selectedValue={bandeiraPosto}
-                            onValueChange={setBandeiraPosto}
-                        >
-                            <Picker.Item label="Selecione a bandeira" value="" />
-                            {Object.keys(imageMap).map(bandeira => (
-                                <Picker.Item key={bandeira} label={bandeira} value={bandeira} />
-                            ))}
-                        </Picker>
+                            <Picker
+                                style={styles.picker}
+                                selectedValue={bandeiraPosto}
+                                onValueChange={setBandeiraPosto}
+                            >
+                                <Picker.Item label="Selecione a bandeira" value="" />
+                                {Object.keys(imageMap).map(bandeira => (
+                                    <Picker.Item key={bandeira} label={bandeira} value={bandeira} />
+                                ))}
+                            </Picker>
                         </View>
 
 
@@ -326,10 +395,23 @@ const CadastroEstabelecimento = () => {
                             onChangeText={(value) => setOutrosServicos(value)}
                         />
 
-                        <Button
-                            title="Cadastrar Estabelecimento"
-                            onPress={handleCadastro}
-                        />
+<View style={styles.buttonContainer}>
+    {posto ? (
+        <>
+            <View style={styles.button}>
+                <Button title="Salvar" onPress={handleSalvar} color="green"/>
+            </View>
+            <View style={styles.button}>
+                <Button title="Cancelar" onPress={handleCancelar} color="red" />
+            </View>
+        </>
+    ) : (
+        <View style={styles.button}>
+            <Button title="Cadastrar" onPress={handleCadastro} />
+        </View>
+    )}
+</View>
+
                     </View>
                 </ScrollView>
             </Body>
@@ -381,6 +463,17 @@ const styles = StyleSheet.create({
     picker: {
         height: 40,
         width: '100%',
+    },
+    buttonContainer: {
+        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        
+    },
+
+    button: {
+        flex: 1,
+        marginHorizontal: 5,
     },
 });
 

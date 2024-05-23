@@ -7,6 +7,7 @@ import Maps from "../pages/Maps";
 import Cadastro from "../pages/Cadastro";
 import Login from "../pages/Login";
 import Postos from "../pages/Postos";
+import Favoritos from "../pages/Favoritos";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,13 @@ const Main = () => {
         }}
       />
        
+       <Stack.Screen 
+        name="Favoritos" 
+        component={Favoritos}
+        options={{
+          header:() => null
+        }}
+      />
     </Stack.Navigator>
 
 

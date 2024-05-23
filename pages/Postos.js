@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { View, StyleSheet, Text, TouchableOpacity, Image, Alert } from 'react-native';
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
+
 
 //IMPORTAÇÕES DE COMPONENTES
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
 import Body from '../componentes/body';
+
+// SERVIÇOS
+import { deletePostos, getPostos, updatePostos } from '../services/postos.service';
+
 
 // Mapeamento de bandeiras a imagens
 const imageMap = {
@@ -15,6 +20,7 @@ const imageMap = {
     'br': require('../Img/Logo/logoBR.png'),
     'ipiranga': require('../Img/Logo/logoipiranga.png'),
 };
+
 
 // Função para normalizar o nome da bandeira e obter a imagem correspondente
 const getBandeiraImage = (bandeira) => {
@@ -26,8 +32,9 @@ const getBandeiraImage = (bandeira) => {
 const Postos = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { posto } = route.params;
+    const { posto, isAdmin } = route.params; // `isAdmin` para verificar se o usuário é administrador
     const [rating, setRating] = useState(0); // Estado para a avaliação
+    
 
     // Criar uma lista de combustíveis com seus preços
     const combustiveis = [];
@@ -38,6 +45,44 @@ const Postos = () => {
             combustiveis.push({ tipoCombustivel, preco });
         }
     }
+
+    const handleEditar = () => {
+        navigation.navigate('Cadastro', { 
+            posto,
+            latitude:posto.latitude,
+            longitude:posto.longitude,
+            preco_1: posto.preco_1,
+            preco_2: posto.preco_2,
+            preco_3: posto.preco_3,
+            preco_4: posto.preco_4,
+            preco_5: posto.preco_5,
+            preco_6: posto.preco_6,
+         });
+    };
+
+    const handleExcluir = () => {
+        Alert.alert(
+            "Excluir Posto",
+            "Tem certeza que deseja excluir este posto?",
+            [
+                {
+                    text: "Cancelar",
+                    style: "cancel"
+                },
+                {
+                    text: "Excluir",
+                    onPress: () => {
+                        deletePostos(posto.id).then(() => {
+                            navigation.goBack();
+                        }).catch(error => {
+                            console.error('Erro ao excluir o posto:', error);
+                        });
+                    },
+                    style: "destructive"
+                }
+            ]
+        );
+    };
 
     return (
         <>
@@ -107,6 +152,18 @@ const Postos = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
+                <View style={styles.divider} />
+
+{/*{isAdmin && (*/}
+    <View style={styles.section}>
+        <TouchableOpacity style={styles.button} onPress={handleEditar}>
+            <Text style={styles.buttonText}>Editar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.buttonExcluir]} onPress={handleExcluir}>
+            <Text style={styles.buttonText}>Excluir</Text>
+        </TouchableOpacity>
+    </View>
+{/*})}*/}
             </Body>
             <Footer />
         </>
@@ -189,6 +246,17 @@ const styles = StyleSheet.create({
     estrelasContainer: {
         flexDirection: 'row',
         justifyContent: 'center', // Centralizar as estrelas
+    },
+    button: {
+        backgroundColor: '#ff79',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginVertical: 5,
+        
+    },
+    buttonExcluir: {
+        backgroundColor: '#ff4d4d',
     },
     buttonMapa: {
         flexDirection: 'row',
