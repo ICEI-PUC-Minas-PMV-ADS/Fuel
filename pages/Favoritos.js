@@ -4,17 +4,11 @@ import Footer from "../componentes/footer";
 
 const Favoritos = () => {
 
-
-    return (
-
-        <>
-        <Header />
-
-        <Footer />
-        </>
-    );
+import React, { useState } from 'react';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 
 
-}
-
-export default Favoritos;
+    },
+  });
+  
+  export default Favoritos
