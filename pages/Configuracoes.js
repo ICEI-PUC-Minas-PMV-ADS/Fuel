@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Image, Alert } from 'react-native';
-import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
-import { FontAwesome } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, Switch, TouchableOpacity, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const ConfigScreen = () => {
   const [darkMode, setDarkMode] = useState(false);
