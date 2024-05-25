@@ -29,29 +29,24 @@ const Footer = () => {
     Login: PerfilRoute,
   });
  
-  // Este hook useEffect é disparado sempre que o navState muda.
-// Seu objetivo é sincronizar o estado do índice visual com a rota atual no estado de navegação.
-React.useEffect(() => {
-  // Extrai o nome da rota atual do estado de navegação usando o índice atual.
-  const currentRoute = navState.routes[navState.index].name;
-  // Encontra o índice da rota atual na lista de rotas definida.
-  const currentIndex = routes.findIndex(route => route.key === currentRoute);
-  // Verifica se o índice atual é diferente do índice do estado.
-  // Se for diferente, atualiza o estado do índice para refletir a rota atual visualmente.
-  if (currentIndex !== index) {
-    setIndex(currentIndex);
-  }
-}, [navState]);  // Dependência do useEffect, só executa novamente se navState mudar.
+  React.useEffect(() => {
+    if (navState && navState.routes) {
+      const currentRoute = navState.routes[navState.index]?.name;
+      const currentIndex = routes.findIndex(route => route.key === currentRoute);
 
-// Função chamada quando um ícone de navegação é pressionado.
+      if (currentIndex !== -1 && currentIndex !== index) {
+        setIndex(currentIndex);
+      }
+    }
+  }, [navState]);
+
 const handleIconPress = (newIndex) => {
-  // Pega o nome da rota associada ao índice selecionado.
-  const routeName = routes[newIndex].key;
-  // Navega para a rota selecionada.
-  navigation.navigate(routeName);
-  // Atualiza o estado do índice para refletir a mudança visualmente.
-  setIndex(newIndex);
-};
+    if (routes[newIndex]) {
+      const routeName = routes[newIndex].key;
+      navigation.navigate(routeName);
+      setIndex(newIndex);
+    }
+  };
 
 return (
     <BottomNavigation
