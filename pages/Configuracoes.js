@@ -1,76 +1,98 @@
-import * as React from 'react';
-import { Appbar, Menu, useTheme } from 'react-native-paper';
-import { Image, View, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
- 
-const Header = () => {
-  const navigation = useNavigation();
-  const [menuVisible, setMenuVisible] = React.useState(false);
- 
-  const openMenu = () => setMenuVisible(true);
-  const closeMenu = () => setMenuVisible(false);
- 
- 
-  const handleMenuPress = () => {
-    // Adicione aqui a lógica para a função do menu
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity, Image, Alert } from 'react-native';
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
+
+const ConfigScreen = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
   };
- 
-  const handleSettingsPress = () => {
-    // Adicione aqui a lógica para a função de configurações
+
+  const handleHelpPress = () => {
+    // Implement logic to show help
   };
- 
+
+  const handleExitPress = () => {
+    // Implement logic to exit the app
+  };
+
+  const handleAddStationPress = () => {
+    // Implement logic to add a new establishment
+  };
+
   return (
-    <Appbar.Header style={styles.appbar}>
- 
-<Menu
-        visible={menuVisible}
-        onDismiss={closeMenu}
-        anchor={<Appbar.Action icon="menu" onPress={openMenu} size={31} />}
-        contentStyle={styles.menuContent}
-      >
-        {/* Opções do menu */}
-        <Menu.Item onPress={() => { /* Adicione aqui a lógica para a primeira opção do menu */ }} title="O que iremos colocar 1" />
-        <Menu.Item onPress={() => { /* Adicione aqui a lógica para a segunda opção do menu */ }} title="ja que td ta no footer ou config 2" />
-        {/* Adicione mais opções conforme necessário */}
-      </Menu>
- 
-      <View style={styles.container}>
-        <Image
-          source={require('../Img/Logo
-          style={styles.image}
-        />
+    <View style={[styles.container, darkMode ? styles.darkContainer : styles.lightContainer]}>
+      <Text style={styles.title}>Configurações</Text>
+      <View style={styles.setting}>
+        <View style={styles.settingRow}>
+          <Icon name="brightness-6" size={24} color={darkMode ? '#fff' : '#000'} />
+          <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Modo Escuro</Text>
+        </View>
+        <Switch value={darkMode} onValueChange={toggleDarkMode} />
       </View>
- 
- 
-      <Appbar.Action
-        icon="cog"
-        size={31} // Definindo o tamanho dos ícones
-        onPress={handleSettingsPress}
-        shifting={true}
- 
-      // color={navigation.isFocused(true) ? '#ffffff' : '#888888'} // Definindo a cor dos ícones com base no estado ativo/inativo
-      />
-    </Appbar.Header>
+      <TouchableOpacity onPress={handleHelpPress} style={styles.setting}>
+        <View style={styles.settingRow}>
+          <Icon name="help-outline" size={24} color={darkMode ? '#fff' : '#000'} />
+          <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Ajuda</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleExitPress} style={styles.setting}>
+        <View style={styles.settingRow}>
+          <Icon name="exit-to-app" size={24} color={darkMode ? '#fff' : '#000'} />
+          <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Sair</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleAddStationPress} style={styles.setting}>
+        <View style={styles.settingRow}>
+          <Icon name="add-location" size={24} color={darkMode ? '#fff' : '#000'} />
+          <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Cadastrar Estabelecimento</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 };
- 
+
 const styles = StyleSheet.create({
-  appbar: {
-    backgroundColor: '#00052F',
-  },
   container: {
     flex: 1,
-    justifyContent: 'center',
+    padding: 16,
+  },
+  darkContainer: {
+    backgroundColor: '#333',
+  },
+  lightContainer: {
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  setting: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  settingRow: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  image: {
-    width: '38%',
-    height: '120%',
+  text: {
+    fontSize: 18,
+    marginLeft: 10,
   },
- 
-  menuContent: {
-    opacity: 0.85, // Definindo a opacidade da mini tela do menu
+  darkText: {
+    color: '#fff',
+  },
+  lightText: {
+    color: '#000',
   },
 });
- 
-export default Header;
+
+export default ConfigScreen;
