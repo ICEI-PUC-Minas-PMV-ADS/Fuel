@@ -47,7 +47,7 @@ const Login = () => {
             password: signupPassword,
         }).then(res => {
             if (res) {
-                Alert.alert('Atenção', 'Usuário cadastrado com sucesso!');
+                Alert.alert('Usuário cadastrado com sucesso!');
             } else {
                 Alert.alert('Atenção', 'Usuário não cadastrado! :(');
             }
