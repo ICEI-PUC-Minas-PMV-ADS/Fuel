@@ -1,11 +1,10 @@
 import API from './webapi.service';
-import { BASE_URL } from './urls';
 
 export const register = async (param) => {
 
     try {
 
-        return await API.post(`${BASE_URL}/register`, param).then(
+        return await API.post(`/users`, param).then(
             response => {
                 return response.data;
 
