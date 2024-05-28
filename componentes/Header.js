@@ -13,10 +13,12 @@ const Header = () => {
   const handleMenuPress = () => {
     // Adicione aqui a lógica para a função do menu
   };
- 
+
   const handleSettingsPress = () => {
-    // Adicione aqui a lógica para a função de configurações
+    navigation.navigate('Config');
   };
+
+
  
   return (
     <Appbar.Header style={styles.appbar}>

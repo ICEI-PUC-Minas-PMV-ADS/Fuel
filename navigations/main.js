@@ -8,6 +8,8 @@ import Cadastro from "../pages/Cadastro";
 import Login from "../pages/Login";
 import Postos from "../pages/Postos";
 import Favoritos from "../pages/Favoritos";
+import ConfigScreen from "../pages/Configuracoes";
+import Header from "../componentes/Header";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,7 +66,15 @@ const Main = () => {
           header:() => null
         }}
       />
+      <Stack.Screen 
+        name="Config" 
+        component={ConfigScreen}
+        options={{ header: (props) => <Header {...props} /> }}
+      />
+
     </Stack.Navigator>
+
+    
 
 
       );
