@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, FlatList, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, FlatList, Image, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import postData from '../db.json'
+import * as Location from 'expo-location';
+
 
 
 
@@ -9,6 +11,7 @@ import postData from '../db.json'
 import Header from "../componentes/Header";
 import Footer from "../componentes/footer";
 import Body from "../componentes/body";
+import filtrosPostos  from "../componentes/filtro";
 //import { getPostos } from '../services/PostosServicesDb';
 
 // Mapeamento de bandeiras a imagens
@@ -50,6 +53,8 @@ const Home = () => {
     const navigation = useNavigation();
     const isFocused = useIsFocused();
     const [postos, setPostos] = useState(postData.postos);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [userLocation, setUserLocation] = useState(null);
 
     const handlePostoSelect = (posto) => {
         navigation.navigate('Postos', { posto });
@@ -60,6 +65,27 @@ const Home = () => {
             setPostos(postData.postos);
         }
     }, [isFocused]);
+
+    useEffect(() => {
+        if (isFocused) {
+            setPostos(postData.postos);
+        }
+    }, [isFocused]);
+
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                console.log('Permission to access location was denied');
+                return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+            setUserLocation(location.coords);
+        })();
+    }, []);
+
+    const filteredPostos = filtrosPostos(postos, searchQuery, userLocation);
 
     const renderItem = ({ item }) => (
         <TouchableOpacity style={styles.itemContainer} onPress={() => handlePostoSelect(item)}>
@@ -82,26 +108,40 @@ const Home = () => {
             </View>
         </TouchableOpacity>
     );
+
     
     
 
     return (
         <>
             <Header />
-            <Body>
-                <FlatList
-                    style={styles.flatlist}
-                    data={postos}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id.toString()}
-                />
-            </Body>
+            <View style={styles.bodyContainer}>
+                <Body>
+                    <TextInput
+                        style={styles.searchBar}
+                        placeholder="Buscar posto..."
+                        value={searchQuery}
+                        onChangeText={setSearchQuery}
+                    />
+                    <FlatList
+                        style={styles.flatlist}
+                        data={filteredPostos}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id.toString()}
+                    />
+                </Body>
+            </View>
             <Footer />
         </>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginBottom: 100,
+    }, 
+
     itemContainer: {
         backgroundColor: "#FFFfFF",
         borderRadius: 15,
@@ -161,6 +201,24 @@ const styles = StyleSheet.create({
     },
     flatlist: {
         flex: 1,
+    },
+
+    bodyContainer: {
+        flex: 1,
+        justifyContent: 'space-between',
+        paddingBottom: 80,
+    },
+
+    searchBar: {
+        height: 50,
+        borderColor: 'green',
+        borderWidth: 2.5,
+        borderRadius: 10,
+        paddingHorizontal: 20,
+        marginHorizontal: 20,
+        marginVertical: 10,
+        fontStyle: 'italic',
+        fontSize: 18
     },
 });
 

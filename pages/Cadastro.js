@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation, useIsFocused, useRoute } from '@react-navigation/native';
 import Header from '../componentes/Header';
@@ -160,7 +160,7 @@ const CadastroEstabelecimento = () => {
                 outrosServicos: outrosServicos || null,
             }).then(res => {
                 navigation.goBack();
-                
+
             });
 
         } else {
@@ -398,17 +398,15 @@ const CadastroEstabelecimento = () => {
 <View style={styles.buttonContainer}>
     {posto ? (
         <>
-            <View style={styles.button}>
-                <Button title="Salvar" onPress={handleSalvar} color="green"/>
-            </View>
-            <View style={styles.button}>
-                <Button title="Cancelar" onPress={handleCancelar} color="red" />
-            </View>
+            <TouchableOpacity style={styles.button} onPress={handleSalvar}>
+                <Text style={styles.buttonText}>Salvar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, styles.buttonCancelar]} onPress={handleCancelar}>
+                <Text style={styles.buttonText}>Cancelar</Text>
+            </TouchableOpacity>
         </>
     ) : (
-        <View style={styles.button}>
-            <Button title="Cadastrar" onPress={handleCadastro} />
-        </View>
+        <Button title="Cadastrar" onPress={handleCadastro} />
     )}
 </View>
 
@@ -464,16 +462,35 @@ const styles = StyleSheet.create({
         height: 40,
         width: '100%',
     },
+
     buttonContainer: {
         marginTop: 20,
         flexDirection: 'row',
+        width: '100%',
         justifyContent: 'space-between',
-        
     },
 
     button: {
-        flex: 1,
-        marginHorizontal: 5,
+        backgroundColor: 'green',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginVertical: 5,
+        flex: 1, // Adiciona flex para ocupar uma parte igual do espaço disponível
+        width: '100%', // Largura fixa para cada botão
+    },
+        
+    buttonCancelar: {
+        backgroundColor: '#ef1616',
+        marginLeft: 10, // Adiciona margem esquerda para separar os botões
+        width: '100%',
+    },
+
+    buttonText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+
     },
 });
 

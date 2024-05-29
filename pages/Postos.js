@@ -153,15 +153,16 @@ const Postos = () => {
                     </View>
                 </View>
                 <View style={styles.divider} />
-
+                <View style={styles.buttonContainer}>
 {/*{isAdmin && (*/}
-    <View style={styles.section}>
-        <TouchableOpacity style={styles.button} onPress={handleEditar}>
-            <Text style={styles.buttonText}>Editar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.buttonExcluir]} onPress={handleExcluir}>
-            <Text style={styles.buttonText}>Excluir</Text>
-        </TouchableOpacity>
+<View style={styles.buttonContainer}>
+    <TouchableOpacity style={styles.buttonEditar} onPress={handleEditar}>
+        <Text style={styles.buttonText}>Editar</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.buttonExcluir} onPress={handleExcluir}>
+        <Text style={styles.buttonText}>Excluir</Text>
+    </TouchableOpacity>
+</View>
     </View>
 {/*})}*/}
             </Body>
@@ -181,6 +182,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.8,
         shadowRadius: 2,
         elevation: 1,
+    
     },
     section: {
         paddingVertical: 10,
@@ -201,6 +203,8 @@ const styles = StyleSheet.create({
     textContainer: {
         flexDirection: 'column',
         justifyContent: 'center',
+        maxWidth: '80%', // Defina a largura máxima conforme necessário
+        
     },
     bandeira: {
         width: 70,
@@ -247,17 +251,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center', // Centralizar as estrelas
     },
-    button: {
-        backgroundColor: '#ff79',
-        padding: 10,
-        borderRadius: 5,
-        alignItems: 'center',
-        marginVertical: 5,
-        
-    },
-    buttonExcluir: {
-        backgroundColor: '#ff4d4d',
-    },
+    
     buttonMapa: {
         flexDirection: 'row',
         paddingVertical: 10,
@@ -272,6 +266,44 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     },
+
+    buttonText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+
+    },
+
+    buttonContainer: {
+        marginTop: 40,
+        marginBottom: 55,
+        flexDirection: 'row',
+        justifyContent: 'space-between', // Distribui os botões igualmente ao longo do eixo principal
+        paddingHorizontal: 10, // Adiciona padding horizontal para manter uma distância da borda
+        flex: 1,
+    },
+
+    buttonEditar: {
+        backgroundColor: '#EFDB16',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 5,
+        flex: 1, // Ocupa uma parte igual do espaço disponível
+        marginRight: 10, // Adiciona margem direita para separar os botões
+    },
+
+
+    buttonExcluir: {
+        backgroundColor: '#ef1616',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 5,
+        flex: 1, // Ocupa uma parte igual do espaço disponível
+        marginLeft: 10, // Adiciona margem esquerda para separar os botões
+    },
+    
 });
 
 export default Postos;
