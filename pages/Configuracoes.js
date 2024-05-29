@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, Switch, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
+//import { useAuth } from '../contexts/AuthContext';
 
 const ConfigScreen = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const navigation = useNavigation();
+  //const { user } = useAuth();
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -17,9 +21,12 @@ const ConfigScreen = () => {
     // Implement logic to exit the app
   };
 
-  const handleAddStationPress = () => {
-    // Implement logic to add a new establishment
+  const handleCadastrarPosto = () => {
+    navigation.navigate('Cadastro');
   };
+  
+
+    
 
   return (
     <View style={[styles.container, darkMode ? styles.darkContainer : styles.lightContainer]}>
@@ -43,12 +50,14 @@ const ConfigScreen = () => {
           <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Sair</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleAddStationPress} style={styles.setting}>
-        <View style={styles.settingRow}>
-          <Icon name="add-location" size={24} color={darkMode ? '#fff' : '#000'} />
-          <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Cadastrar Estabelecimento</Text>
-        </View>
-      </TouchableOpacity>
+     {/* {user && user.role === 'admin' && ( */}
+        <TouchableOpacity onPress={handleCadastrarPosto} style={styles.setting}>
+          <View style={styles.settingRow}>
+            <Icon name="add-location" size={24} color={darkMode ? '#fff' : '#000'} />
+            <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Cadastrar Novo Posto</Text>
+          </View>
+        </TouchableOpacity>
+      {/*)}*/}
     </View>
   );
 };

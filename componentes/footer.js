@@ -16,7 +16,7 @@ const Footer = () => {
   const [routes] = React.useState([
     { key: 'Home', title: 'Home', icon: 'gas-station', },
     { key: 'Favoritos', title: 'Favoritos', icon: 'star' },
-    { key: 'Cadastro', title: 'Cadastro', icon: 'calculator' },
+    { key: 'Calculadora', title: 'Calculadora', icon: 'calculator' },
     { key: 'Maps', title: 'Mapa', icon: 'map' },
     { key: 'Login', title: 'Login', icon: 'account' },
   ]);
@@ -24,7 +24,7 @@ const Footer = () => {
   const renderScene = BottomNavigation.SceneMap({
     Home: HomeRoute,
     Favoritos: FavoritosRoute,
-    Cadastro: CalculadoraRoute,
+    Calculadora: CalculadoraRoute,
     Maps: MapaRoute,
     Login: PerfilRoute,
   });
