@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-// Atualize o BASE_URL para o endereço correto do servidor
-export const BASE_URL = 'http://10.0.2.2:3000/'; // Para emulador Android, altere para 10.0.2.2
-// Para iOS ou ambiente de produção, ajuste conforme necessário
-// export const BASE_URL = 'http://127.0.0.1:3000/'; // Para iOS emulador ou localhost
+export const BASE_URL = 'https://petite-buttons-take.loca.lt/'; // Alterar para a url gerada pelo localhost
 
 const API = axios.create({
     baseURL: BASE_URL,
@@ -13,3 +10,11 @@ const API = axios.create({
 });
 
 export default API;
+
+/*Passos para a API funcionar
+ 1º - Abrir um terminar e inciar o db => json-server --watch db.json --host 127.0.0.1
+ 2º - Abrir um novo terminal e instalar o localtunnel =>  npm install -g localtunnel
+ 3º - Retornar ao terminal onde foi instalado o localtunnel e colocar => lt --port 3000
+ Após ser gerado a url, substituir pela disponível na linha 3 dessa página.
+ 4º - Abra um novo terminal e rode o expo => npx expo start
+*/

@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, Button, TouchableOpacity, Alert, TextInput } fr
 import Body from '../componentes/body';
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
-import { register } from '../services/auth.services';
+import { register, checkEmailExists } from '../services/auth.services';
+
 
 const Login = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -31,7 +32,7 @@ const Login = () => {
 
     const handleLogin = () => {
         if (!isValidPhoneNumber(phoneNumber) || !isValidPassword(loginPassword)) {
-            Alert.alert("Erro", "Número de celular ou senha inválidos.");
+            Alert.alert("Atenção", "Número de celular ou senha inválidos.");
             return;
         }
         console.log('Número de celular:', phoneNumber);
@@ -39,23 +40,50 @@ const Login = () => {
         // Exemplo: chame uma função de autenticação com os dados de número de celular e senha
     };
 
-    const handleSignUp = () => {
-        register({
+    const handleSignUp = async () => {
+        // Verificar se o nome de usuário atende aos critérios
+        if (name.length < 6) {
+            Alert.alert('Atenção', 'O nome de usuário deve ter no mínimo 6 caracteres.');
+            return;
+        }
+
+        try {
+        // Verificar se o email já existe
+        const emailExists = await checkEmailExists(email);
+        if (emailExists) {
+           Alert.alert('Este email já está cadastrado. Por favor, use outro email.');
+           return;
+        }
+        
+        // Verificar se o formato do email é válido
+        if (!isValidEmail(email)) {
+            Alert.alert('Formato de email inválido.');
+            return;
+        }
+    
+        // Verificar se a senha tem no mínimo 8 caracteres
+        if (signupPassword.length < 8) {
+            Alert.alert('A senha deve ter no mínimo 8 caracteres.');
+            return;
+        }
+    
+        // Se todas as validações passarem, prosseguir com o cadastro
+        const res = await register({
             nome: name,
             email: email,
             celular: signupPhoneNumber,
             password: signupPassword,
-        }).then(res => {
-            if (res) {
-                Alert.alert('Usuário cadastrado com sucesso!');
-            } else {
-                Alert.alert('Atenção', 'Usuário não cadastrado! :(');
-            }
-        }).catch(err => {
-            console.error(err);
-            Alert.alert('Erro', 'Ocorreu um erro ao tentar cadastrar o usuário.');
         });
-    };
+        if (res) {
+            Alert.alert('Cadastro realizado com sucesso!');
+        } else {
+            Alert.alert('Usuário não cadastrado! :(');
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert('Ocorreu um erro ao tentar cadastrar o usuário.');
+    }
+};
 
     const handleForgotPassword = () => {
         // Navegação para a tela de redefinição de senha
