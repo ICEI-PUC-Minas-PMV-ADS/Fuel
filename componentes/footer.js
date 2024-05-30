@@ -6,6 +6,7 @@ import { useNavigation, useNavigationState } from '@react-navigation/native';
 const HomeRoute = () => null;
 const FavoritosRoute = () => null;
 const MapaRoute = () => null;
+const MapaGeralRoute = () => null;
 const PerfilRoute = () => null;
 const CalculadoraRoute = () => <Text>Calculadora</Text>;
  
@@ -17,7 +18,7 @@ const Footer = () => {
     { key: 'Home', title: 'Home', icon: 'gas-station', },
     { key: 'Favoritos', title: 'Favoritos', icon: 'star' },
     { key: 'Calculadora', title: 'Calculadora', icon: 'calculator' },
-    { key: 'Maps', title: 'Mapa', icon: 'map' },
+    { key: 'MapaGeral', title: 'Mapa', icon: 'map' },
     { key: 'Login', title: 'Login', icon: 'account' },
   ]);
  
@@ -26,6 +27,7 @@ const Footer = () => {
     Favoritos: FavoritosRoute,
     Calculadora: CalculadoraRoute,
     Maps: MapaRoute,
+    MapaGeral: MapaGeralRoute,
     Login: PerfilRoute,
   });
  

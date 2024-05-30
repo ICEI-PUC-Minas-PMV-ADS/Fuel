@@ -10,6 +10,7 @@ import Postos from "../pages/Postos";
 import Favoritos from "../pages/Favoritos";
 import ConfigScreen from "../pages/Configuracoes";
 import Header from "../componentes/Header";
+import MapaGeral from "../pages/MapaGeral";
 
 const Stack = createNativeStackNavigator();
 
@@ -71,6 +72,14 @@ const Main = () => {
         component={ConfigScreen}
         options={{ header: (props) => <Header {...props} /> }}
       />
+
+<Stack.Screen 
+      name="MapaGeral" 
+      component={MapaGeral}
+      options={{
+        header:() => null
+      }}
+       />
 
     </Stack.Navigator>
 
