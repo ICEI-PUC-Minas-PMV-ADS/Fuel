@@ -11,6 +11,7 @@ import Favoritos from "../pages/Favoritos";
 import ConfigScreen from "../pages/Configuracoes";
 import Header from "../componentes/Header";
 import MapaGeral from "../pages/MapaGeral";
+import Calculadora from "../pages/Calculadora";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,13 @@ const Main = () => {
       <Stack.Screen 
       name="MeuPerfil" 
       component={MeuPerfil}
+      options={{
+        header:() => null
+      }}
+       />
+       <Stack.Screen 
+      name="Calculadora" 
+      component={Calculadora}
       options={{
         header:() => null
       }}
