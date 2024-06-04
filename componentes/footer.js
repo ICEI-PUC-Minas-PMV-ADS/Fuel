@@ -8,7 +8,7 @@ const FavoritosRoute = () => null;
 const MapaRoute = () => null;
 const MapaGeralRoute = () => null;
 const PerfilRoute = () => null;
-const CalculadoraRoute = () => <Text>Calculadora</Text>;
+const CalculadoraRoute = () => null;
  
 const Footer = () => {
   const navigation = useNavigation();
@@ -74,6 +74,8 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 11,
+    fontWeight: 'bold',
+    marginTop: '3%',
   }
 })
  
