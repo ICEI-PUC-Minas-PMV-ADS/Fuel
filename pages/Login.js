@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, Button, TouchableOpacity, Alert, TextInput } fr
 import Body from '../componentes/body';
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
-import { register, checkEmailExists } from '../services/auth.services';
+import { register, checkEmailExists, login } from '../services/auth.services';
 
 
-const Login = () => {
+const Login = ({navigation}) => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [name, setName] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
@@ -30,15 +30,21 @@ const Login = () => {
         return /\S+@\S+\.\S+/.test(email);
     };
 
-    const handleLogin = () => {
-        if (!isValidPhoneNumber(phoneNumber) || !isValidPassword(loginPassword)) {
-            Alert.alert("Atenção", "Número de celular ou senha inválidos.");
-            return;
+    const handleLogin = async () => {
+        try {
+            const user = await login({ email, loginPassword });
+            if (user) {
+                // Login bem-sucedido, navegar para a tela de perfil ou outra tela desejada
+                navigation.navigate('MeuPerfil');
+            } else {
+                Alert.alert('Erro', 'Usuário não encontrado ou senha incorreta');
+            }
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+            Alert.alert('Erro', 'Ocorreu um erro ao tentar fazer login.');
         }
-        console.log('Número de celular:', phoneNumber);
-        console.log('Senha:', loginPassword);
-        // Exemplo: chame uma função de autenticação com os dados de número de celular e senha
     };
+
 
     const handleSignUp = async () => {
         // Verificar se o nome de usuário atende aos critérios
@@ -96,16 +102,16 @@ const Login = () => {
             <Body>
                 <View style={styles.container}>
                     <Text style={styles.textTitulo}>Login</Text>
-                    <Text style={styles.subtitulo}>Entre com seu número de celular e senha!</Text>
+                    <Text style={styles.subtitulo}>Entre com seu e-mail e senha!</Text>
 
-                    {/* Campo de entrada para o número de celular */}
+                    {/* Campo de entrada para o email */}
                     <TextInput
                         style={styles.input}
-                        placeholder="Seu número de celular"
+                        placeholder="Seu e-mail"
                         placeholderTextColor={styles.placeholderText.color}
-                        onChangeText={text => setPhoneNumber(text)}
-                        value={phoneNumber}
-                        keyboardType="numeric"
+                        onChangeText={text => setEmail(text)}
+                        value={email}
+                        keyboardType="email-address"
                     />
 
                     {/* Campo de entrada para a senha */}

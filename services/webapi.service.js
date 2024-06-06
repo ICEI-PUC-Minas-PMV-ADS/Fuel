@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'https://petite-buttons-take.loca.lt/'; // Alterar para a url gerada pelo localhost
+export const BASE_URL = 'https://sweet-jeans-laugh.loca.lt/'; // Alterar para a url gerada pelo localhost
 
 const API = axios.create({
     baseURL: BASE_URL,
