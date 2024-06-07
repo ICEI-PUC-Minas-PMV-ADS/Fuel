@@ -33,27 +33,27 @@ const ConfigScreen = () => {
       <Text style={styles.title}>Configurações</Text>
       <View style={styles.setting}>
         <View style={styles.settingRow}>
-          <Icon name="brightness-6" size={24} color={darkMode ? '#fff' : '#000'} />
+          <Icon name="wb-sunny" size={24} color={darkMode ? '#fff' : '#000'} />
           <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Modo Escuro</Text>
         </View>
         <Switch value={darkMode} onValueChange={toggleDarkMode} />
       </View>
       <TouchableOpacity onPress={handleHelpPress} style={styles.setting}>
         <View style={styles.settingRow}>
-          <Icon name="help-outline" size={24} color={darkMode ? '#fff' : '#000'} />
+          <Icon name="help-center" size={24} color={darkMode ? '#fff' : '#000'} />
           <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Ajuda</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleExitPress} style={styles.setting}>
         <View style={styles.settingRow}>
-          <Icon name="exit-to-app" size={24} color={darkMode ? '#fff' : '#000'} />
+          <Icon name="logout" size={24} color={darkMode ? '#fff' : '#000'} />
           <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Sair</Text>
         </View>
       </TouchableOpacity>
      {/* {user && user.role === 'admin' && ( */}
         <TouchableOpacity onPress={handleCadastrarPosto} style={styles.setting}>
           <View style={styles.settingRow}>
-            <Icon name="add-location" size={24} color={darkMode ? '#fff' : '#000'} />
+            <Icon name="add-business" size={24} color={darkMode ? '#fff' : '#000'} />
             <Text style={[styles.text, darkMode ? styles.darkText : styles.lightText]}>Cadastrar Novo Posto</Text>
           </View>
         </TouchableOpacity>

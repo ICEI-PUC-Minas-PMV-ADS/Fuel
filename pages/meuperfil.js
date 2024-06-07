@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
 import Body from '../componentes/body';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const MeuPerfil = () => {
@@ -41,6 +42,15 @@ const MeuPerfil = () => {
         }
     };
 
+    const handleLogout = async () => {
+        try {
+            await AsyncStorage.removeItem('userToken'); // ou qualquer chave que você esteja usando para armazenar os dados do usuário
+            navigation.navigate('Home'); // Redirecionar para a tela Home
+        } catch (error) {
+            console.error('Erro ao fazer logout:', error);
+            Alert.alert('Erro', 'Ocorreu um erro ao tentar fazer logout.');
+        }
+    };
 
     return (
         <>
@@ -81,7 +91,7 @@ const MeuPerfil = () => {
                     onChangeText={text => setEmail(text)}
                     value={email}
                 />
-                <TouchableOpacity style={styles.buttonSair} onPress={() => Alert.alert('Sair')}>
+                <TouchableOpacity style={styles.buttonSair} onPress={handleLogout}>
                     <Image source={require('../Img/Icones/logout.png')} style={{ width: 24, height: 24, marginRight: 10 }} />
                     <Text style={styles.buttonSairText}>Sair</Text>
                 </TouchableOpacity>
@@ -136,7 +146,7 @@ const styles = StyleSheet.create({
         borderRadius: 35, //Arrendodamento do botão
         justifyContent: 'center', //posicao centralizada verticalmente
         alignItems: 'center', // posicao centralizada horizontalmente
-        marginTop: 300, // determinando onde o botao sair, deve ficar
+        marginTop: 45, // determinando onde o botao sair, deve ficar
         alignSelf: 'center', //centraliza o botão dentro do container
     },
     //Texto do Botão Sair/Logout

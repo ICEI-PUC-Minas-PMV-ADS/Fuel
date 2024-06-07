@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, TouchableOpacity, Alert, TextInput } fr
 import Body from '../componentes/body';
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
+import { useFocusEffect } from '@react-navigation/native';
 import { register, checkEmailExists, login } from '../services/auth.services';
 
 
@@ -29,12 +30,23 @@ const Login = ({navigation}) => {
     const isValidEmail = (email) => {
         return /\S+@\S+\.\S+/.test(email);
     };
+    
+    const resetForm = () => {
+        setEmail('');
+        setLoginPassword('');
+        setSignupPhoneNumber('');
+        setSignupPassword('');
+        setName('');
+        setPhoneNumber('');
+    };
 
     const handleLogin = async () => {
         try {
             const user = await login({ email, loginPassword });
             if (user) {
-                // Login bem-sucedido, navegar para a tela de perfil ou outra tela desejada
+                // Login bem-sucedido, redefinir os campos de entrada
+                 resetForm();
+                // Login bem-sucedido, navegar para a tela de perfil
                 navigation.navigate('MeuPerfil');
             } else {
                 Alert.alert('Erro', 'Usuário não encontrado ou senha incorreta');
@@ -82,6 +94,8 @@ const Login = ({navigation}) => {
         });
         if (res) {
             Alert.alert('Cadastro realizado com sucesso!');
+            // Redefinir os campos de entrada após o cadastro bem-sucedido
+            resetForm();
         } else {
             Alert.alert('Usuário não cadastrado! :(');
         }

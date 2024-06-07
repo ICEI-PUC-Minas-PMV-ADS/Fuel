@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, } from "react-native";
 import { BottomNavigation, Text, Icon, } from 'react-native-paper';
 import { useNavigation, useNavigationState } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeRoute = () => null;
 const FavoritosRoute = () => null;
@@ -41,11 +42,25 @@ const Footer = () => {
       }
     }
   }, [navState]);
+  
+  const checkIfLoggedIn = async () => {
+    const user = await AsyncStorage.getItem('loggedInUser');
+    return !!user; // Retorna true se houver um usuário logado
+  };
 
-const handleIconPress = (newIndex) => {
+  const handleIconPress = async (newIndex) => {
     if (routes[newIndex]) {
       const routeName = routes[newIndex].key;
-      navigation.navigate(routeName);
+      if (routeName === 'Login') {
+        const isLoggedIn = await checkIfLoggedIn();
+        if (isLoggedIn) {
+          navigation.navigate('MeuPerfil');
+        } else {
+          navigation.navigate(routeName);
+        }
+      } else {
+        navigation.navigate(routeName);
+      }
       setIndex(newIndex);
     }
   };
