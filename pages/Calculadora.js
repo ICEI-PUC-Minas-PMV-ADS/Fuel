@@ -67,7 +67,9 @@ const App = () => {
             </Body>
             </ScrollView>
             <Footer />
+            <View style={{ height: 120 }} />
         </Container>
+        
     );
 };
 
