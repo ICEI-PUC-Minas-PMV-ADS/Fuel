@@ -64,10 +64,10 @@ const App = () => {
                         Exemplo: se o Etanol custa R$ 3,29 e a Gasolina R$ 4,92, o resultado da divisão do primeiro pelo segundo é 0,67, menor que 0,7. Portanto, é mais vantajoso abastecer com Etanol.
                     </Text>
                 </View>
+                <View style={{ height: 120 }} />
             </Body>
             </ScrollView>
             <Footer />
-            <View style={{ height: 120 }} />
         </Container>
         
     );
