@@ -8,12 +8,13 @@ import { register, checkEmailExists, login } from '../services/auth.services';
 
 
 const Login = ({navigation}) => {
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [loginEmail, setLoginEmail] = useState('');  
+    const [signupEmail, setSignupEmail] = useState('');  
     const [name, setName] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const [signupPassword, setSignupPassword] = useState('');
     const [signupPhoneNumber, setSignupPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
+
 
     const passwordInputRef = useRef(null);
     const nameInputRef = useRef(null);
@@ -22,27 +23,21 @@ const Login = ({navigation}) => {
     const isValidPhoneNumber = (number) => {
         return /[0-9]{10,11}/.test(number);
     };
-
-    const isValidPassword = (password) => {
-        return password.length > 7;
-    };
-
-    const isValidEmail = (email) => {
-        return /\S+@\S+\.\S+/.test(email);
-    };
     
     const resetForm = () => {
-        setEmail('');
+        setLoginEmail('');
         setLoginPassword('');
+        setSignupEmail('');
         setSignupPhoneNumber('');
         setSignupPassword('');
         setName('');
-        setPhoneNumber('');
     };
 
     const handleLogin = async () => {
         try {
-            const user = await login({ email, loginPassword });
+            console.log('Senha digitada:', loginPassword);
+            
+            const user = await login({ email: loginEmail, password: loginPassword });
             if (user) {
                 // Login bem-sucedido, redefinir os campos de entrada
                  resetForm();
@@ -67,14 +62,14 @@ const Login = ({navigation}) => {
 
         try {
         // Verificar se o email já existe
-        const emailExists = await checkEmailExists(email);
+        const emailExists = await checkEmailExists(signupEmail);
         if (emailExists) {
            Alert.alert('Este email já está cadastrado. Por favor, use outro email.');
            return;
         }
         
         // Verificar se o formato do email é válido
-        if (!isValidEmail(email)) {
+        if (!/\S+@\S+\.\S+/.test(signupEmail)) {
             Alert.alert('Formato de email inválido.');
             return;
         }
@@ -87,9 +82,9 @@ const Login = ({navigation}) => {
     
         // Se todas as validações passarem, prosseguir com o cadastro
         const res = await register({
-            nome: name,
-            email: email,
-            celular: signupPhoneNumber,
+            name,
+            email: signupEmail,
+            phoneNumber: signupPhoneNumber,
             password: signupPassword,
         });
         if (res) {
@@ -118,13 +113,13 @@ const Login = ({navigation}) => {
                     <Text style={styles.textTitulo}>Login</Text>
                     <Text style={styles.subtitulo}>Entre com seu e-mail e senha!</Text>
 
-                    {/* Campo de entrada para o email */}
+                    {/* Campo de entrada para o email do login*/}
                     <TextInput
                         style={styles.input}
                         placeholder="Seu e-mail"
                         placeholderTextColor={styles.placeholderText.color}
-                        onChangeText={text => setEmail(text)}
-                        value={email}
+                        onChangeText={text => setLoginEmail(text)}
+                        value={loginEmail}
                         keyboardType="email-address"
                     />
 
@@ -171,13 +166,13 @@ const Login = ({navigation}) => {
                         onSubmitEditing={() => nameInputRef.current.focus()}
                     />
 
-                    {/* Campo de entrada para e-mail */}
+                    {/* Campo de entrada para e-mail do cadastro*/}
                     <TextInput
                         style={styles.input}
                         placeholder="Digite o seu e-mail"
                         placeholderTextColor={styles.placeholderText.color}
-                        onChangeText={text => setEmail(text)}
-                        value={email}
+                        onChangeText={text => setSignupEmail(text)}
+                        value={signupEmail}
                         returnKeyType="next"
                         keyboardType="email-address"
                     />

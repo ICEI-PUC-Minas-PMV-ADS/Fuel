@@ -55,7 +55,7 @@ export const checkEmailExists = async (email) => {
     }
 };
 
-export const login = async ({ email, loginPassword }) => {
+export const login = async ({ email, password }) => {
     try {
         const usersJson = await AsyncStorage.getItem('users');
         const users = usersJson ? JSON.parse(usersJson) : [];
@@ -71,7 +71,7 @@ export const login = async ({ email, loginPassword }) => {
         console.log('Usuário encontrado:', user);
 
         // Verificar se a senha está correta
-        if (user.password !== loginPassword) {
+        if (user.password !== password) {
             throw new Error('Senha incorreta');
         }
 
