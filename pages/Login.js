@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView, Alert } from 'react-native';
 import Body from '../componentes/body';
 import Header from '../componentes/Header';
 import Footer from '../componentes/footer';
@@ -106,12 +106,14 @@ const Login = ({navigation}) => {
     };
 
     return (
-        <>
+        <View style={styles.container}>
             <Header />
-            <Body>
-                <View style={styles.container}>
-                    <Text style={styles.textTitulo}>Login</Text>
-                    <Text style={styles.subtitulo}>Entre com seu e-mail e senha!</Text>
+            <KeyboardAvoidingView style={styles.container} behavior="padding">
+                <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
+                    <View style={styles.inner}>
+                        <Text style={styles.textTitulo}>Login</Text>
+                        <Text style={styles.subtitulo}>Entre com seu e-mail e senha!</Text>
+
 
                     {/* Campo de entrada para o email do login*/}
                     <TextInput
@@ -131,7 +133,7 @@ const Login = ({navigation}) => {
                         onChangeText={setLoginPassword}
                         value={loginPassword}
                         placeholderTextColor={styles.placeholderText.color}
-                        returnKeyType="done"
+                        returnKeyType="next"
                         ref={passwordInputRef}
                         onSubmitEditing={() => nameInputRef.current.focus()}
                     />
@@ -203,10 +205,12 @@ const Login = ({navigation}) => {
                     <TouchableOpacity style={[styles.button, { backgroundColor: '#027500', borderColor: '#000000' }]} onPress={handleSignUp}>
                         <Text style={styles.buttonText}>Confirmar cadastro</Text>
                     </TouchableOpacity>
-                </View>
-            </Body>
+                    <View style={{ height: 120 }} />
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
             <Footer />
-        </>
+        </View>
     );
 };
 
@@ -214,10 +218,17 @@ const styles = StyleSheet.create({
     // Parte principal da tela, parte abaixo do icone Foto.
     container: {
         flex: 1,
-        width: '100%',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
         backgroundColor: '#ffffff',
+        paddingBottom: 2,
+    },
+    scrollContainer: {
+        flexGrow: 1,
+    },
+    inner: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 4,
     },
     //Texto
     textTitulo: {
@@ -250,7 +261,7 @@ const styles = StyleSheet.create({
 
     //Botões Acessar e Confirmar Cadastro
     button: {
-        width: '48%',
+        width: '50%',
         height: 40,
         backgroundColor: '#EBCD07',
         justifyContent: 'center',
@@ -286,16 +297,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
         color: '#333333',
-    },
-    //Icone Configurações
-    configContainer: {
-        marginRight: 15,
-    },
-
-    config: {
-        width: 30,
-        height: 30,
-        resizeMode: 'contain',
     },
 });
 
