@@ -39,10 +39,14 @@ const Login = ({navigation}) => {
             
             const user = await login({ email: loginEmail, password: loginPassword });
             if (user) {
-                // Login bem-sucedido, redefinir os campos de entrada
-                 resetForm();
-                // Login bem-sucedido, navegar para a tela de perfil
-                navigation.navigate('MeuPerfil');
+                resetForm();
+
+                // Redirecionamento baseado no papel do usuário
+                if (user.role === 'admin') {
+                    navigation.navigate('Cadastro'); // Substitua 'TelaDoAdmin' pelo nome da tela do administrador
+                } else {
+                    navigation.navigate('MeuPerfil'); // Redireciona para a tela de perfil padrão
+                }
             } else {
                 Alert.alert('Erro', 'Usuário não encontrado ou senha incorreta');
             }

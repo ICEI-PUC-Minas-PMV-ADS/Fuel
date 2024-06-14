@@ -1,30 +1,28 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "Carolina Novaes",
-      "phoneNumber": "31983614979",
-      "password": "pucminas"
-    },
-    {
-      "id": "2",
-      "name": "Ruan Gonzaga",
-      "phoneNumber": "31975740194",
-      "password": "pucminas"
-    },
-    {
-      "email": "paulo.henrique@pucminas.br",
-      "password": "$2a$10$jcGzm1mXny2itb5KA/x2OeACNGQrnif0i9qrbkwx2PRW1KuJupsDO",
-      "name": "Paulo Henrique ",
-      "phoneNumber": "31991518537",
-      "id": "JXYtJof"
-    },
-    {
       "id": "44a0",
       "nome": "Carolina",
       "email": "carolinaleite@pucminas.br",
       "celular": "31983614979",
-      "password": "CarolTeste"
+      "password": "CarolTeste",
+      "role": "users"
+    },
+    {
+      "id": "admin",
+      "name": "Administrador",
+      "email": "administrador@pucminas.br",
+      "phoneNumber": "31993157465",
+      "password": "Admin2024",
+      "role": "admin"
+    },
+    {
+      "id": "c9c3",
+      "name": "Alessandra",
+      "email": "alessandrateste@gmail.com",
+      "phoneNumber": "31992012954",
+      "password": "TesteAle",
+      "role": "user"
     }
   ],
   "postos": [

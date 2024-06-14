@@ -3,6 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const register = async (param) => {
     try {
+        // Adiciona 'role' ao objeto param, assumindo que o default é 'user'
+        param.role = param.role || 'user';
         const response = await API.post(`/users`, param);
         const newUser = response.data;
 
@@ -57,30 +59,53 @@ export const checkEmailExists = async (email) => {
 
 export const login = async ({ email, password }) => {
     try {
-        const usersJson = await AsyncStorage.getItem('users');
-        const users = usersJson ? JSON.parse(usersJson) : [];
+        let usersJson = await AsyncStorage.getItem('users');
+        let users = usersJson ? JSON.parse(usersJson) : [];
 
-        // Encontrar o usuário pelo email
+        // Verificar se o email está presente no AsyncStorage
         const user = users.find(u => u.email === email);
 
-        // Verificar se o usuário foi encontrado
         if (!user) {
             throw new Error('Email não encontrado');
         }
 
-        console.log('Usuário encontrado:', user);
+        console.log('Senha digitada:', password);
 
         // Verificar se a senha está correta
         if (user.password !== password) {
             throw new Error('Senha incorreta');
         }
 
+        console.log('Usuário encontrado:', user);
+
+        // Atualizar o usuário no AsyncStorage
+        await updateOrAddUser(user);
+
         console.log('Login bem-sucedido:', user);
 
-        // Se chegou até aqui, o login foi bem-sucedido
         return user;
     } catch (error) {
-        console.error('Erro ao tentar fazer login:', error);
+        console.error(`Erro ao tentar fazer login: ${error.message}`);
         throw error;
     }
 };
+
+const updateOrAddUser = async (user) => {
+    try {
+        let usersJson = await AsyncStorage.getItem('users');
+        let users = usersJson ? JSON.parse(usersJson) : [];
+
+        const existingUserIndex = users.findIndex(u => u.id === user.id || u.email === user.email);
+
+        if (existingUserIndex !== -1) {
+            users[existingUserIndex] = user;
+        } else {
+            users.push(user);
+        }
+
+        await AsyncStorage.setItem('users', JSON.stringify(users));
+    } catch (error) {
+        console.error('Erro ao atualizar o AsyncStorage:', error);
+    }
+};
+
