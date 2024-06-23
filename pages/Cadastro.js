@@ -11,7 +11,7 @@ import { getPostos, updatePostos, insertPostos, deletePostos } from '../services
 
 import { imageMap } from './home';
 
-const tiposCombustivel = ['Etanol', 'Gasolina Comum', 'Gasolina Aditivada', 'Gasolina Premium', 'Diesel'];
+const tiposCombustivel = ['Etanol', 'Gasolina', 'Gasolina Aditivada', 'Gasolina Premium', 'Diesel'];
 
 
 
