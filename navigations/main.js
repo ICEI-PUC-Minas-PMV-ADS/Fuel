@@ -6,6 +6,12 @@ import MeuPerfil from "../pages/meuperfil";
 import Maps from "../pages/Maps";
 import Cadastro from "../pages/Cadastro";
 import Login from "../pages/Login";
+import Postos from "../pages/Postos";
+import Favoritos from "../pages/Favoritos";
+import ConfigScreen from "../pages/Configuracoes";
+import Header from "../componentes/Header";
+import MapaGeral from "../pages/MapaGeral";
+import Calculadora from "../pages/Calculadora";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +28,13 @@ const Main = () => {
       <Stack.Screen 
       name="MeuPerfil" 
       component={MeuPerfil}
+      options={{
+        header:() => null
+      }}
+       />
+       <Stack.Screen 
+      name="Calculadora" 
+      component={Calculadora}
       options={{
         header:() => null
       }}
@@ -47,8 +60,38 @@ const Main = () => {
         header:() => null
       }}
        />
+        <Stack.Screen 
+        name="Postos" 
+        component={Postos}
+        options={{
+          header:() => null
+        }}
+      />
        
+       <Stack.Screen 
+        name="Favoritos" 
+        component={Favoritos}
+        options={{
+          header:() => null
+        }}
+      />
+      <Stack.Screen 
+        name="Config" 
+        component={ConfigScreen}
+        options={{ header: (props) => <Header {...props} /> }}
+      />
+
+<Stack.Screen 
+      name="MapaGeral" 
+      component={MapaGeral}
+      options={{
+        header:() => null
+      }}
+       />
+
     </Stack.Navigator>
+
+    
 
 
       );

@@ -1,0 +1,58 @@
+###POSTOS
+GET http://localhost:3000/postos 
+
+### CREATE 
+POST http://localhost:3000/postos
+Content-Type: application/json
+
+{
+      "id": "3",
+    "nome": "Posto Teste 3",
+    "cnpj": "23.456.325/0001-25",
+    "endereco": "Av. Amazonas 4085",
+    "bandeiraPosto": "ipiranga",
+    "tipoCombustivel_1": "Etanol",
+    "preco_1": 3.56,
+    "tipoCombustivel_2": "Gasolina",
+    "preco_2": 5.89,
+    "tipoCombustivel_3": "Diesel",
+    "preco_3": 4.85,
+    "tipoCombustivel_4": "Gasolina",
+    "preco_4": 5.01,
+    "tipoCombustivel_5": "Etanol",
+    "preco_5": 4.56,
+    "tipoCombustivel_6": "Gasolina",
+    "preco_6": 4.99,
+    "outrosServicos": "Lavanderia"  
+}
+
+###UPDATE
+PUT http://localhost:3000/postos/3
+Content-Type: application/json
+
+{
+    "id": "3",
+    "nome": "Posto Teste 3",
+    "cnpj": "23.456.325/0001-25",
+    "endereco": "Av. Amazonas 4085",
+    "bandeiraPosto": "ipiranga",
+    "tipoCombustivel_1": "Etanol",
+    "preco_1": 3.56,
+    "tipoCombustivel_2": "Gasolina",
+    "preco_2": 5.89,
+    "tipoCombustivel_3": "Diesel",
+    "preco_3": 4.85,
+    "tipoCombustivel_4": "Gasolina",
+    "preco_4": 5.01,
+    "tipoCombustivel_5": "Etanol",
+    "preco_5": 4.56,
+    "tipoCombustivel_6": "Gasolina",
+    "preco_6": 4.99,
+    "outrosServicos": "Mecânico"  
+}
+
+### GET - Recuperar itens
+GET http://localhost:3000/postos/3
+
+###DELETE 
+DELETE http://localhost:3000/postos/3

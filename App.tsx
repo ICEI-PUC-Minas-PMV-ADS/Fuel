@@ -12,6 +12,7 @@ import MeuPerfil from './pages/meuperfil';
 import Body from './componentes/body';
 import Main from './navigations/main';
 import Cadastro from './pages/Cadastro';
+import UserProvider from './contexts/UserContext';
 
 const App = () => {
   const [showTelaInicial, setShowTelaInicial] = useState(true);
@@ -23,6 +24,7 @@ const App = () => {
   }, []);
 
   return (
+    <UserProvider>
     <NavigationContainer>
     <SafeAreaProvider>
       <PaperProvider theme={theme}>
@@ -32,6 +34,7 @@ const App = () => {
       </PaperProvider>
     </SafeAreaProvider>
     </NavigationContainer>
+    </UserProvider>
   );
 };
 

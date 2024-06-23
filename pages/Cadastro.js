@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { useNavigation } from '@react-navigation/native';
-import { useIsFocused } from '@react-navigation/native';
+import { useNavigation, useIsFocused, useRoute } from '@react-navigation/native';
 import Header from '../componentes/Header';
 import Body from '../componentes/body';
 import Footer from '../componentes/footer';
 
 
-import { getPostos, insertPostos } from '../services/PostosServicesDb';
+import { getPostos, updatePostos, insertPostos, deletePostos } from '../services/postos.service';
 
-import { imageMap, getBandeiraImage } from './home';
+import { imageMap } from './home';
 
-const tiposCombustivel = ['Etanol', 'Gasolina Comum', 'Gasolina Aditivada', 'Gasolina Premium', 'Diesel'];
+const tiposCombustivel = ['Etanol', 'Gasolina', 'Gasolina Aditivada', 'Gasolina Premium', 'Diesel'];
 
 
 
@@ -20,22 +19,29 @@ const CadastroEstabelecimento = () => {
 
     const navigation = useNavigation();
     const isFocused = useIsFocused();
-
+    const route = useRoute();
     const [Postos, setPostos] = useState([]);
+    const posto = route.params?.posto;
+
+
 
     useEffect(() => {
-        getPostos().then(dados => {
-            setPostos(dados);
-        }).catch(error => {
-            console.error('Erro ao buscar os postos:', error);
-        });
+        if (isFocused) {
+            getPostos().then(dados => {
+                setPostos(dados);
+            }).catch(error => {
+                console.error('Erro ao buscar os postos:', error);
+            });
 
-        console.log('Iniciando a tela!');
-    }, []);
+            console.log('Iniciando a tela!');
+        }
+    }, [isFocused]);
 
     const [nome, setNome] = useState('');
     const [cnpj, setCnpj] = useState('');
     const [endereco, setEndereco] = useState('');
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
     const [tipoCombustivel_1, setTipoCombustivel_1] = useState('');
     const [tipoCombustivel_2, setTipoCombustivel_2] = useState('');
     const [tipoCombustivel_3, setTipoCombustivel_3] = useState('');
@@ -51,6 +57,33 @@ const CadastroEstabelecimento = () => {
     const [bandeiraPosto, setBandeiraPosto] = useState('');
     const [outrosServicos, setOutrosServicos] = useState('');
 
+    useEffect(() => {
+        if (posto) {
+            setNome(posto.nome);
+            setEndereco(posto.endereco);
+            setCnpj(posto.cnpj);
+            setBandeiraPosto(posto.bandeiraPosto);
+            setLatitude(posto.latitude);
+            setLongitude(posto.longitude);
+            setTipoCombustivel_1(posto.tipoCombustivel_1)
+            setTipoCombustivel_2(posto.tipoCombustivel_2)
+            setTipoCombustivel_3(posto.tipoCombustivel_3)
+            setTipoCombustivel_4(posto.tipoCombustivel_4)
+            setTipoCombustivel_5(posto.tipoCombustivel_5)
+            setTipoCombustivel_6(posto.tipoCombustivel_6)
+            setPreco_1(posto.preco_1)
+            setPreco_2(posto.preco_2)
+            setPreco_3(posto.preco_3)
+            setPreco_4(posto.preco_4)
+            setPreco_5(posto.preco_5)
+            setPreco_6(posto.preco_6)
+            setOutrosServicos(posto.outrosServicos)
+
+        }
+    }, [posto]);
+
+    //LOGICA PARA CADASTRAR POSTO 
+
     const handleCadastro = () => {
         console.log('Iniciando cadastro do estabelecimento...');
         if (!nome || !cnpj || !endereco || !tipoCombustivel_1 || !preco_1 || !tipoCombustivel_2 || !preco_2 || !bandeiraPosto || !outrosServicos) {
@@ -59,6 +92,8 @@ const CadastroEstabelecimento = () => {
             message += !nome ? 'Nome, ' : '';
             message += !cnpj ? 'CNPJ, ' : '';
             message += !endereco ? 'Endereço, ' : '';
+            message += !latitude ? 'Latitude, ' : '';
+            message += !longitude ? 'Longitude, ' : '';
             message += !tipoCombustivel_1 ? 'Tipo de Combustível, ' : '';
             message += !preco_1 ? 'Preço, ' : '';
             message += !bandeiraPosto ? 'Bandeira do Posto, ' : '';
@@ -71,6 +106,8 @@ const CadastroEstabelecimento = () => {
             nome: nome,
             cnpj: cnpj,
             endereco: endereco,
+            latitude: latitude,
+            longitude: longitude,
             bandeiraPosto: bandeiraPosto,
             tipoCombustivel_1: tipoCombustivel_1 || null,
             preco_1: preco_1 || null,
@@ -95,15 +132,46 @@ const CadastroEstabelecimento = () => {
             });
     };
 
+    //LOGICA PARA ATUALIZAR POSTO
+
     const handleSalvar = () => {
 
-        if (!item) {
+        if (posto) {
+            updatePostos({
+                id: posto.id,
+                nome: nome,
+                cnpj: cnpj,
+                endereco: endereco,
+                latitude: latitude,
+                longitude: longitude,
+                bandeiraPosto: bandeiraPosto,
+                tipoCombustivel_1: tipoCombustivel_1 || null,
+                preco_1: preco_1 || null,
+                tipoCombustivel_2: tipoCombustivel_2 || null,
+                preco_2: preco_2 || null,
+                tipoCombustivel_3: tipoCombustivel_3 || null,
+                preco_3: preco_3 || null,
+                tipoCombustivel_4: tipoCombustivel_4 || null,
+                preco_4: preco_4 || null,
+                tipoCombustivel_5: tipoCombustivel_5 || null,
+                preco_5: preco_5 || null,
+                tipoCombustivel_6: tipoCombustivel_6 || null,
+                preco_6: preco_6 || null,
+                outrosServicos: outrosServicos || null,
+            }).then(res => {
+                navigation.goBack();
+
+            });
+
+        } else {
 
             insertPostos(
                 {
                     nome: nome,
                     cnpj: cnpj,
                     endereco: endereco,
+                    latitude: latitude,
+                    longitude: longitude,
                     bandeiraPosto: bandeiraPosto,
                     tipoCombustivel_1: tipoCombustivel_1 || null,
                     preco_1: preco_1 || null,
@@ -119,13 +187,24 @@ const CadastroEstabelecimento = () => {
                     preco_6: preco_6 || null,
                     outrosServicos: outrosServicos || null,
                 }
-            ).then();
+            ).then(res => {
+                navigation.goBack();
+            });
         }
 
-        navigation.goBack();
-
     };
+    // LOGICA PARA EXCLUIR POSTO
 
+    const handleExcluir = () => {
+        deletePostos(item.cnpj).then(res => {
+            navigation.goBack();
+        });
+    }
+
+    //LOGICA PARA CANCELAR A ATUALIZAÇÃO
+    const handleCancelar = () => {
+        navigation.navigate('Home');
+    };
 
     return (
         <>
@@ -155,17 +234,33 @@ const CadastroEstabelecimento = () => {
                             onChangeText={(value) => setEndereco(value)}
                         />
 
-                        <Text style={styles.label}>Bandeira do Posto:<Text style={styles.required}>*</Text></Text>
-                        <Picker
+                        <Text style={styles.label}>Latitude:<Text style={styles.required}>*</Text></Text>
+                        <TextInput
                             style={styles.input}
-                            selectedValue={bandeiraPosto}
-                            onValueChange={setBandeiraPosto}
-                        >
-                            <Picker.Item label="Selecione a bandeira" value="" />
-                            {Object.keys(imageMap).map(bandeira => (
-                                <Picker.Item key={bandeira} label={bandeira} value={bandeira} />
-                            ))}
-                        </Picker>
+                            value={latitude}
+                            onChangeText={(value) => setLatitude(value)}
+                        />
+
+                        <Text style={styles.label}>Longitude:<Text style={styles.required}>*</Text></Text>
+                        <TextInput
+                            style={styles.input}
+                            value={longitude}
+                            onChangeText={(value) => setLongitude(value)}
+                        />
+
+                        <Text style={styles.label}>Bandeira do Posto:<Text style={styles.required}>*</Text></Text>
+                        <View style={styles.pickerContainer}>
+                            <Picker
+                                style={styles.picker}
+                                selectedValue={bandeiraPosto}
+                                onValueChange={setBandeiraPosto}
+                            >
+                                <Picker.Item label="Selecione a bandeira" value="" />
+                                {Object.keys(imageMap).map(bandeira => (
+                                    <Picker.Item key={bandeira} label={bandeira} value={bandeira} />
+                                ))}
+                            </Picker>
+                        </View>
 
 
                         <Text style={styles.label}>Tipo de Combustivel:<Text style={styles.required}>*</Text></Text>
@@ -300,10 +395,21 @@ const CadastroEstabelecimento = () => {
                             onChangeText={(value) => setOutrosServicos(value)}
                         />
 
-                        <Button
-                            title="Cadastrar Estabelecimento"
-                            onPress={handleCadastro}
-                        />
+<View style={styles.buttonContainer}>
+    {posto ? (
+        <>
+            <TouchableOpacity style={styles.button} onPress={handleSalvar}>
+                <Text style={styles.buttonText}>Salvar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, styles.buttonCancelar]} onPress={handleCancelar}>
+                <Text style={styles.buttonText}>Cancelar</Text>
+            </TouchableOpacity>
+        </>
+    ) : (
+        <Button title="Cadastrar" onPress={handleCadastro} />
+    )}
+</View>
+
                     </View>
                 </ScrollView>
             </Body>
@@ -346,7 +452,7 @@ const styles = StyleSheet.create({
     },
 
     pickerContainer: {
-        borderColor: 'gray',
+        borderColor: 'grey',
         borderWidth: 1,
         borderRadius: 5, // Opcional: Adicione bordas arredondadas para uma aparência mais suave
         marginBottom: 10,
@@ -355,6 +461,36 @@ const styles = StyleSheet.create({
     picker: {
         height: 40,
         width: '100%',
+    },
+
+    buttonContainer: {
+        marginTop: 20,
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+    },
+
+    button: {
+        backgroundColor: 'green',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginVertical: 5,
+        flex: 1, // Adiciona flex para ocupar uma parte igual do espaço disponível
+        width: '100%', // Largura fixa para cada botão
+    },
+        
+    buttonCancelar: {
+        backgroundColor: '#ef1616',
+        marginLeft: 10, // Adiciona margem esquerda para separar os botões
+        width: '100%',
+    },
+
+    buttonText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+
     },
 });
 
