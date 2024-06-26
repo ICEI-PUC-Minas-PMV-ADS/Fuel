@@ -6,10 +6,11 @@ POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "name": "Paulo Henrique ",
-    "email": "paulo.henrique@pucminas.br",
-    "phoneNumber": "31991518537",
-    "password": "abacaxi"
+    "name": "Carol-Administradora",
+    "email": "caroladm@pucminas.br",
+    "phoneNumber": "31983614979",
+    "password": "TesteCarol",
+    "role": "admin"
 }
 
 ### LOGIN
@@ -17,7 +18,13 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email": "paulo.henrique@pucminas.br",
-    "password": "abacaxi"
+    "email": "caroladm@pucminas.br",
+    "password": "TesteCarol"
 }
+
+### DELETE 
+DELETE http://localhost:3000/users/
+
+
+
 

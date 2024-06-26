@@ -9,20 +9,12 @@
       "role": "users"
     },
     {
-      "id": "admin",
-      "name": "Administrador",
-      "email": "administrador@pucminas.br",
-      "phoneNumber": "31993157465",
-      "password": "Admin2024",
-      "role": "admin"
-    },
-    {
-      "id": "c9c3",
-      "name": "Alessandra",
-      "email": "alessandrateste@gmail.com",
-      "phoneNumber": "31992012954",
-      "password": "TesteAle",
-      "role": "user"
+      "email": "caroladm@pucminas.br",
+      "password": "$2a$10$UoX2XdZIAiyaMOXbXXj4H.6SOtkI/Jylhsw/dzo11N0yUS82hGTqe",
+      "name": "Carol-Administradora",
+      "phoneNumber": "31983614979",
+      "role": "admin",
+      "id": "6--BX7Q"
     }
   ],
   "postos": [
